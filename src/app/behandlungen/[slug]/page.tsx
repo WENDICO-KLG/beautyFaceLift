@@ -64,19 +64,16 @@ export default async function TreatmentPage({ params }: { params: Promise<Params
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
               <p className="eyebrow" data-reveal="fade">
-                {t.kicker} · Zürich
+                {t.kicker}
               </p>
-              <span className="gold-rule mt-5" aria-hidden="true" />
-              <h1 id="t-title" className="mt-7 text-h1 text-espresso" data-reveal="up">
-                {t.name} <em className="text-champagne-deep">in Zürich</em>
+              <h1 id="t-title" className="mt-5 text-h1 text-espresso" data-reveal="up">
+                {t.name} <span className="text-espresso/45">in Zürich</span>
               </h1>
               <p className="mt-7 max-w-prose-narrow text-lead text-taupe" data-reveal="up">
                 {t.intro}
               </p>
-              <p className="mt-8 flex gap-6 text-small text-espresso" data-reveal="fade">
-                <span>{t.durationMin} Min</span>
-                <span className="text-champagne">·</span>
-                <span>ab CHF {t.priceFrom}</span>
+              <p className="mt-8 text-small text-espresso" data-reveal="fade">
+                {t.durationMin} Min, ab CHF {t.priceFrom}
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row" data-reveal="up">
                 <Button href={SITE.bookingUrl}>{t.name} buchen</Button>
@@ -93,9 +90,7 @@ export default async function TreatmentPage({ params }: { params: Promise<Params
       <section className="border-y border-line bg-white py-section" aria-labelledby="benefits-title">
         <div className="container-site grid gap-14 lg:grid-cols-2 lg:gap-24">
           <div data-reveal="up">
-            <p className="eyebrow">Wirkung</p>
-            <span className="gold-rule mt-5" aria-hidden="true" />
-            <h2 id="benefits-title" className="mt-6 text-h2 text-espresso">
+            <h2 id="benefits-title" className="text-h2 text-espresso">
               Was {t.name} für Ihre Haut tut.
             </h2>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -105,24 +100,17 @@ export default async function TreatmentPage({ params }: { params: Promise<Params
                 </li>
               ))}
             </ul>
-            <h3 className="mt-12 font-serif text-[1.375rem] text-espresso">Ideal bei</h3>
-            <p className="mt-3 text-taupe">{t.idealFor.join(" · ")}</p>
+            <h3 className="mt-12 font-display text-[1.375rem] text-espresso">Ideal bei</h3>
+            <p className="mt-3 text-taupe">{t.idealFor.join(", ")}</p>
           </div>
 
           <div data-reveal="up">
-            <p className="eyebrow">Ablauf</p>
-            <span className="gold-rule mt-5" aria-hidden="true" />
-            <h2 className="mt-6 text-h2 text-espresso">So läuft Ihre Behandlung ab.</h2>
-            <ol className="mt-10 space-y-8">
-              {t.process.map((p, i) => (
-                <li key={p.title} className="flex gap-5">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-espresso text-[0.6875rem] text-ivory">
-                    0{i + 1}
-                  </span>
-                  <div>
-                    <h3 className="font-serif text-[1.25rem] text-espresso">{p.title}</h3>
-                    <p className="mt-1 text-small text-taupe">{p.text}</p>
-                  </div>
+            <h2 className="text-h2 text-espresso">So läuft Ihre Behandlung ab.</h2>
+            <ol className="mt-10 grid gap-6">
+              {t.process.map((p) => (
+                <li key={p.title} className="border-t border-line pt-5">
+                  <h3 className="font-display text-[1.25rem] text-espresso">{p.title}</h3>
+                  <p className="mt-1 text-small text-taupe">{p.text}</p>
                 </li>
               ))}
             </ol>
@@ -132,14 +120,12 @@ export default async function TreatmentPage({ params }: { params: Promise<Params
 
       <section className="py-section" aria-labelledby="related-title">
         <div className="container-site">
-          <p className="eyebrow">Ebenfalls beliebt</p>
-          <span className="gold-rule mt-5" aria-hidden="true" />
-          <h2 id="related-title" className="mt-6 text-h2 text-espresso">
+          <h2 id="related-title" className="text-h2 text-espresso">
             Passende Behandlungen.
           </h2>
-          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:w-2/3">
-            {related.map((r) => (
-              <TreatmentCard key={r.slug} t={r} index={TREATMENTS.indexOf(r)} />
+          <div className="mt-14 grid gap-4 md:grid-cols-2">
+            {related.map((r, i) => (
+              <TreatmentCard key={r.slug} t={r} tone={i ? "light" : "base"} delay={i * 90} className="h-[26rem]" />
             ))}
           </div>
         </div>

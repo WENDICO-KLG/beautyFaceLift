@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 export function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
   return (
     <details className="group border-b border-line" open={defaultOpen}>
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left font-serif text-[1.1875rem] leading-snug text-espresso transition-colors hover:text-champagne-deep sm:text-[1.3125rem] [&::-webkit-details-marker]:hidden">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left font-display text-[1.1875rem] leading-snug text-espresso transition-colors hover:text-champagne-deep sm:text-[1.3125rem] [&::-webkit-details-marker]:hidden">
         {q}
         <span
           aria-hidden="true"
@@ -25,10 +25,8 @@ export function FAQ() {
     <section id="faq" className="py-section" aria-labelledby="faq-title">
       <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
         <div data-reveal="up" className="lg:sticky lg:top-28 lg:self-start">
-          <p className="eyebrow">FAQ</p>
-          <span className="gold-rule mt-5" aria-hidden="true" />
-          <h2 id="faq-title" className="mt-6 text-h2 text-espresso">
-            Häufige <em className="text-champagne-deep">Fragen.</em>
+          <h2 id="faq-title" className="text-h2 text-espresso">
+            Häufige Fragen
           </h2>
           <p className="mt-6 max-w-prose-narrow text-lead text-taupe">
             Ihre Frage ist nicht dabei? Teresa berät Sie gerne persönlich.

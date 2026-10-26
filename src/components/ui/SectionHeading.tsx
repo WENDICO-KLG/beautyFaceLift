@@ -1,24 +1,21 @@
 type Props = {
-  eyebrow: string;
   title: React.ReactNode;
   lead?: React.ReactNode;
-  align?: "left" | "center";
-  as?: "h1" | "h2";
+  /** Small label above the headline. Use on max. 1 of 3 sections (see skills.md). */
+  eyebrow?: string;
   id?: string;
   className?: string;
 };
 
-/** Brand pattern: Eyebrow → gold rule → serif headline → optional lead. */
-export function SectionHeading({ eyebrow, title, lead, align = "left", as: Tag = "h2", id, className = "" }: Props) {
-  const center = align === "center";
+/** Headline stacked over an optional lead. Left-aligned, one message per section. */
+export function SectionHeading({ title, lead, eyebrow, id, className = "" }: Props) {
   return (
-    <div className={`${center ? "mx-auto text-center" : ""} max-w-2xl ${className}`} data-reveal="up">
-      <p className="eyebrow">{eyebrow}</p>
-      <span className={`gold-rule mt-5 ${center ? "mx-auto" : ""}`} aria-hidden="true" />
-      <Tag id={id} className="mt-6 text-h2 text-espresso [&_em]:text-champagne-deep">
+    <div className={`max-w-2xl ${className}`} data-reveal="up">
+      {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
+      <h2 id={id} className="text-h2 text-espresso">
         {title}
-      </Tag>
-      {lead && <p className={`mt-6 text-lead text-taupe ${center ? "mx-auto" : ""} max-w-prose-narrow`}>{lead}</p>}
+      </h2>
+      {lead && <p className="mt-6 max-w-prose-narrow text-lead text-taupe">{lead}</p>}
     </div>
   );
 }

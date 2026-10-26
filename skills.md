@@ -10,16 +10,16 @@ Kurze, verbindliche Regeln für alle (Menschen und Agents), die an dieser Websit
 
 ## Design
 - Farben nur über Tokens (`bg-ivory`, `text-espresso`, `text-taupe`, `border-line` …). Keine Hex-Werte in Komponenten.
-- Kein Pink, kein Rosé, keine Gradients (ausser dem subtilen Placeholder-Shimmer), kein Neon.
+- Kein Pink, kein Rosé, keine Gradients (ausser dem funktionalen Lesbarkeits-Scrim im Hero), kein Neon.
 - Champagne #C8A982 nie als Textfarbe auf hellem Grund. Für Text und Buttons `champagne-deep` verwenden.
-- Pro Headline höchstens **ein** kursives Akzentwort (`<em>`).
-- Section-Aufbau: `SectionHeading` (Eyebrow → Goldlinie → H2 → optional Lead).
-- Radius:
-  - `rounded-card` (16 px) für Cards
-  - `rounded-media` (20 px) für Bilder
-  - `rounded-full` für Buttons und Chips
+- **Keine kursiven Akzentwörter** in Headlines. Betonung nur über zweifarbige Zeilen (Espresso / Espresso 40 %), und nur in Hero und Über Teresa.
+- Section-Aufbau: `SectionHeading` (H2 + optional Lead). Eyebrow nur in max. 1 von 3 Sections, keine Goldlinie.
+- Jede Section nutzt eine eigene Layout-Familie (Bento, Typo-Komposition, Tabs, Karussell, Accordion …). Nie dasselbe Layout zweimal.
+- Radius: `rounded-card` (24 px), `rounded-media` (28 px), `rounded-panel` (32 px), `rounded-full` für Buttons und Chips. Keine freien Werte.
+- **Jede Karte** über `ShapedCard` (ausgestufte Ecke oben rechts, optional unten links). Keine schlichten Rechteck-Karten.
+- Schrift: Headlines `font-display` (Outfit, light), Text Manrope. Keine Serifenschrift, kein Kursiv.
 - Borders statt Schatten. `shadow-soft` nur für schwebende Elemente (Hero-Rating-Card, Mobile-Bar).
-- Section-Abstände über `py-section` (fluid). Nicht frei erfinden.
+- Section-Abstände über `py-section` (fluid, 72-120 px). Flächige Sections als gerahmte Panels mit `--spacing-frame`.
 
 ## Komponenten
 - Neue UI-Bausteine zuerst in `components/ui` prüfen bzw. ergänzen. Section-Komponenten setzen sich daraus zusammen.
@@ -47,6 +47,14 @@ Kurze, verbindliche Regeln für alle (Menschen und Agents), die an dieser Websit
 - Keine neuen Dependencies ohne klaren Grund. Keine Third-Party-Scripts im Initial Load.
 - Bilder: `next/image`, korrektes `sizes`, `priority` nur für das LCP-Bild.
 - Jedes Medium hat ein festes Seitenverhältnis (kein CLS).
+
+## Anti-AI-Slop (Pre-Flight vor jeder Abgabe)
+- `grep -rn "[–—]" src` muss für sichtbaren Text leer sein.
+- Eyebrows zählen: `grep -rn 'className="eyebrow' src/components/sections` ≤ ceil(Sections / 3).
+- Keine Nummerierungen, Mittelpunkt-Ketten, dekorative Punkte, Wasserzeichen, Glow-Verläufe.
+- Copy laut vorlesen: Klingt ein Satz nach Slogan-Generator oder Werbeprosa, durch einen sachlichen Satz ersetzen.
+- Kein Scroll-Listener, keine erfundenen Zitate, keine Fake-Kennzahlen.
+- Vollständige Liste: Abschnitt „Kein AI-Slop“ in `CLAUDE.md` und Skill `design-taste-frontend`.
 
 ## Content
 - Sprache: Deutsch (Schweiz). Kein ß, sondern „ss“. Anrede „Sie“.

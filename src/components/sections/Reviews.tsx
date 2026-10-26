@@ -6,21 +6,26 @@ import { SITE } from "@/lib/site";
 import { Stars } from "@/components/ui/misc";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { ShapedCard } from "@/components/ui/ShapedCard";
 
 type Review = (typeof REVIEWS)[number];
 
 export function ReviewCard({ r }: { r: Review }) {
   return (
-    <figure className="flex h-full flex-col rounded-card border border-line bg-white p-8 sm:p-10">
+    <ShapedCard
+      as="figure"
+      className="flex h-full flex-col bg-white p-7 sm:p-9"
+      topRight={{
+        className: "pb-2 pl-3 pt-1",
+        children: <span className="block rounded-full border border-line px-4 py-2 text-[0.75rem] text-espresso">{r.treatment}</span>,
+      }}
+    >
       <Stars />
-      <blockquote className="mt-6 flex-1 font-serif text-[1.25rem] leading-[1.5] text-espresso sm:text-[1.375rem]">
+      <blockquote className="mt-8 flex-1 font-display text-[1.1875rem] font-light leading-[1.45] tracking-[-0.01em] text-espresso sm:text-[1.3125rem]">
         „{r.quote}“
       </blockquote>
-      <figcaption className="mt-8 flex items-center justify-between border-t border-line pt-5 text-small">
-        <span className="text-espresso">{r.name}</span>
-        <span className="text-taupe">{r.treatment}</span>
-      </figcaption>
-    </figure>
+      <figcaption className="mt-8 text-small text-taupe">{r.name}</figcaption>
+    </ShapedCard>
   );
 }
 
@@ -38,14 +43,12 @@ export function Reviews() {
       <div className="container-site">
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div data-reveal="up">
-            <p className="eyebrow">Bewertungen</p>
-            <span className="gold-rule mt-5" aria-hidden="true" />
-            <h2 id="reviews-title" className="mt-6 text-h2 text-espresso">
-              Von Kundinnen <em className="text-champagne-deep">empfohlen.</em>
+            <h2 id="reviews-title" className="text-h2 text-espresso">
+              Von Kundinnen empfohlen.
             </h2>
           </div>
           <div className="flex items-center gap-6" data-reveal="up">
-            <p className="font-serif text-[4.5rem] leading-none text-espresso sm:text-[5.5rem]">{SITE.rating.value}</p>
+            <p className="font-display text-[4.5rem] leading-none text-espresso sm:text-[5.5rem]">{SITE.rating.value}</p>
             <div>
               <Stars className="size-4" />
               <p className="mt-2 text-small text-taupe">
@@ -61,7 +64,7 @@ export function Reviews() {
       {/* PLACEHOLDER: example review texts */}
       <ul
         ref={track}
-        className="no-scrollbar mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-[max(var(--spacing-gutter),calc((100vw-var(--container-site))/2))] pb-2 lg:mt-16"
+        className="no-scrollbar mt-14 flex snap-x snap-mandatory scroll-px-[max(var(--spacing-gutter),calc((100vw-var(--container-site))/2))] gap-6 overflow-x-auto scroll-smooth px-[max(var(--spacing-gutter),calc((100vw-var(--container-site))/2))] pb-2 lg:mt-16"
         aria-label="Kundenbewertungen"
       >
         {REVIEWS.map((r) => (

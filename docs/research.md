@@ -64,3 +64,27 @@ Nicht abrufbar (Bot-Schutz): Pinterest, Aesop, Dr. Barbara Sturm, Sisley, La Pra
 - Headline maximal 3 Zeilen.
 - Tap-Targets mindestens 44 px.
 - Cards als horizontale Scroll-Snap-Reihen statt langer Stapel.
+
+## 3. Zweite Runde: Komponenten-Referenzen (Stand 26.10.2026)
+
+Pinterest blockiert weiterhin automatisierte Abrufe. Grundlage sind deshalb:
+- das vom Kunden gelieferte Pinterest-Moodboard („Luméra Skincare“)
+- Awwwards: Beauty in Stem 2026, Koba Skincare, Aesthetics Clinic
+- Figma-Community-Hero-Sections für Skincare
+- Colorlib-Roundups 2026
+
+Analysiert wurden nur Komponenten, nicht Farben.
+
+**Übernommene Komponenten**
+- **Gerahmter Full-Bleed-Hero.** Das Bild sitzt in einem abgerundeten Rahmen mit wenigen Pixeln Abstand zum Viewport. Die grosse Headline liegt direkt auf dem Bild, mit zweifarbigem Gewicht statt Effekt.
+- **Schwebende Info-Karten im Hero.** Im Moodboard sind das Produkt- und „25K+ Kunden“-Karten. Bei uns sind es Rating und Teresa mit Adresse.
+- **Split-Navigation** mit zentriertem Logo und rundem Menü-Button.
+- **Cut-out-Corner-Cards.** Die konkave Ecke, in der Text oder Button sitzt, ist ein aktueller Pinterest-Trend für Produkt- und Service-Karten.
+- **Typografie um ein Bild komponiert.** Im Moodboard: „Skilled Skin Experts“ links und „Results-Driven“ rechts eines Portraits.
+- **Runde Pfeil-Controls** für Karussells und Cards.
+
+**Bewusst nicht übernommen**
+- Dunkle Bildwelt (Farbe ist nicht Teil der Analyse)
+- Avatar-Reihen mit erfundenen Gesichtern
+- schräg gestellte Bildkarten
+- „98 %“-Fake-Kennzahlen

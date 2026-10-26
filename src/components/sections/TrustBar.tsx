@@ -9,7 +9,7 @@ export function TrustItem({ icon, value, label }: TrustItemProps) {
     <li className="flex items-center gap-4 lg:justify-center">
       <Icon name={icon} className="size-6 shrink-0 text-champagne" />
       <div className="leading-tight">
-        <p className="font-serif text-[1.375rem] text-espresso">{value}</p>
+        <p className="font-display text-[1.375rem] text-espresso">{value}</p>
         <p className="mt-1 text-[0.8125rem] text-taupe">{label}</p>
       </div>
     </li>

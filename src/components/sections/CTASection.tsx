@@ -1,45 +1,48 @@
 import { SITE } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { Icon } from "@/components/ui/Icon";
+import { CornerButton, ShapedCard } from "@/components/ui/ShapedCard";
 
 type Props = {
   title?: React.ReactNode;
   text?: string;
 };
 
+/** Closing booking block: framed like the hero, copy left, image right. */
 export function CTASection({
-  title = (
-    <>
-      Bereit für Ihre <em className="text-champagne-deep">persönliche</em> Beauty-Behandlung?
-    </>
-  ),
+  title = "Bereit für Ihre persönliche Beauty-Behandlung?",
   text = "Entdecken Sie die passende Behandlung für Ihre Haut und vereinbaren Sie Ihren persönlichen Termin in Zürich.",
 }: Props) {
   return (
-    <section className="px-3 pb-3 sm:px-4 sm:pb-4" aria-labelledby="cta-title">
-      <div className="relative overflow-hidden rounded-[1.75rem] bg-beige px-[var(--spacing-gutter)] py-[clamp(5rem,4rem+6vw,10rem)] text-center">
-        {/* Oversized monogram watermark */}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-[0.18em] left-1/2 -translate-x-1/2 font-serif text-[clamp(14rem,30vw,28rem)] leading-none text-white/35"
-        >
-          BF
-        </span>
-        <div className="relative mx-auto max-w-3xl" data-reveal="up">
-          <p className="eyebrow">Ihr Termin</p>
-          <span className="gold-rule mx-auto mt-5" aria-hidden="true" />
-          <h2 id="cta-title" className="mt-7 text-h1 text-espresso">
+    <section data-final-cta className="px-[var(--spacing-frame)] pb-[var(--spacing-frame)]" aria-labelledby="cta-title">
+      <div className="grid overflow-hidden rounded-panel bg-beige lg:grid-cols-[1.2fr_1fr]">
+        <div className="px-[var(--spacing-gutter)] py-16 sm:py-20 lg:py-28 lg:pl-[max(var(--spacing-gutter),calc((100vw-var(--container-site))/2))]" data-reveal="up">
+          <h2 id="cta-title" className="max-w-xl text-h2 text-espresso">
             {title}
           </h2>
-          <p className="mx-auto mt-7 max-w-prose-narrow text-lead text-taupe">{text}</p>
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          <p className="mt-7 max-w-prose-narrow text-lead text-taupe">{text}</p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button href={SITE.bookingUrl}>Termin buchen</Button>
-            <Button href={SITE.consultUrl} variant="secondary">
+            <Button href={SITE.consultUrl} variant="secondary" arrow={false}>
               Beratung anfragen
             </Button>
           </div>
-          <p className="mt-8 text-[0.8125rem] text-taupe">
-            ★ {SITE.rating.value}/5 · {SITE.rating.count}+ Bewertungen · {SITE.address.street}, {SITE.address.city}
-          </p>
+        </div>
+        <div className="relative min-h-72 p-3 lg:min-h-0 lg:pl-0">
+          <ShapedCard
+            surface="var(--color-beige)"
+            className="h-full min-h-72"
+            topRight={{
+              children: (
+                <CornerButton href={SITE.bookingUrl} label="Termin buchen" external>
+                  <Icon name="arrow" className="size-4 -rotate-45" strokeWidth={1.5} />
+                </CornerButton>
+              ),
+            }}
+          >
+            <ImagePlaceholder label="Detail: Hände von Teresa mit Pflegeprodukt" tone="deep" rounded="rounded-none" className="absolute inset-0" reveal={false} />
+          </ShapedCard>
         </div>
       </div>
     </section>

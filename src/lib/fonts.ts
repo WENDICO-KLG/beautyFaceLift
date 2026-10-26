@@ -1,19 +1,25 @@
+import localFont from "next/font/local";
+
 /**
- * Brand fonts: Playfair Display (headlines) + Inter (body).
- *
- * The build environment currently has no network access, so the fonts cannot be
- * fetched by next/font/google at build time. Until then the CSS stacks in
- * globals.css fall back to Georgia / system-ui.
- *
- * To activate (pick one):
- *  A) With network:   uncomment the next/font/google block below.
- *  B) Self-hosted:    put the variable woff2 files into src/fonts/ and use next/font/local.
- * Both are self-hosted in the final build (no runtime requests to Google, no CLS).
+ * Brand fonts, self-hosted (SIL Open Font License, files in src/fonts):
+ *  - Outfit: light geometric display face for headlines (200/300/400)
+ *  - Manrope: variable grotesk for body copy and UI (200-800)
+ * next/font/local adds preload, font-display: swap and metric-matched fallbacks (no CLS).
  */
+const outfit = localFont({
+  variable: "--font-outfit",
+  display: "swap",
+  src: [
+    { path: "../fonts/outfit-latin-200-normal.woff2", weight: "200", style: "normal" },
+    { path: "../fonts/outfit-latin-300-normal.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/outfit-latin-400-normal.woff2", weight: "400", style: "normal" },
+  ],
+});
 
-// import { Inter, Playfair_Display } from "next/font/google";
-// const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], style: ["normal", "italic"], display: "swap" });
-// const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
-// export const fontVariables = `${playfair.variable} ${inter.variable}`;
+const manrope = localFont({
+  variable: "--font-manrope",
+  display: "swap",
+  src: [{ path: "../fonts/manrope-latin-wght-normal.woff2", weight: "200 800", style: "normal" }],
+});
 
-export const fontVariables = "";
+export const fontVariables = `${outfit.variable} ${manrope.variable}`;

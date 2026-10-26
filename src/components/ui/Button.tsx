@@ -4,7 +4,7 @@ import { Icon } from "./Icon";
 type Variant = "primary" | "secondary" | "ghost";
 
 const base =
-  "group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-7 text-[0.9375rem] font-medium tracking-[0.01em] " +
+  "group inline-flex min-h-12 shrink-0 items-center whitespace-nowrap justify-center gap-3 rounded-full px-7 text-[0.9375rem] font-medium tracking-[0.01em] " +
   "transition-[background-color,color,border-color,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-luxe)]";
 
 const variants: Record<Variant, string> = {

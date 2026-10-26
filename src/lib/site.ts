@@ -11,7 +11,7 @@ export const SITE = {
   url: "https://www.beautyfacelift.ch",
   locale: "de_CH",
   description:
-    "Beauty Face Lift – Kosmetikstudio an der Bahnhofstrasse in Zürich. Gesichtsbehandlungen, Hydra4Face, Microneedling, Fruchtsäurepeeling und ColdPLASMA – persönlich durchgeführt von Teresa Stimac mit über 20 Jahren Erfahrung.",
+    "Beauty Face Lift ist ein Kosmetikstudio an der Bahnhofstrasse in Zürich. Gesichtsbehandlungen, Hydra4Face, Microneedling, Fruchtsäurepeeling und ColdPLASMA, persönlich durchgeführt von Teresa Stimac mit über 20 Jahren Erfahrung.",
 
   owner: {
     name: "Teresa Stimac",
@@ -27,7 +27,7 @@ export const SITE = {
     region: "ZH",
     country: "CH",
   },
-  // Approximate coordinates of Bahnhofstrasse 94 – verify before launch
+  // Approximate coordinates of Bahnhofstrasse 94, verify before launch
   geo: { lat: 47.3763, lng: 8.5393 },
 
   // PLACEHOLDER: real contact data
@@ -45,7 +45,7 @@ export const SITE = {
 
   // PLACEHOLDER: real opening hours
   openingHours: [
-    { label: "Montag – Freitag", days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
+    { label: "Montag bis Freitag", days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
     { label: "Samstag", days: ["Saturday"], opens: "09:00", closes: "16:00" },
     { label: "Sonntag", days: [], opens: "", closes: "" },
   ],

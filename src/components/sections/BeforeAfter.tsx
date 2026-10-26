@@ -3,20 +3,20 @@
 import { useId, useState } from "react";
 
 /** Accessible before/after comparison driven by a native range input. */
-export function BeforeAfter({ label }: { label: string }) {
+export function BeforeAfter({ label, className = "rounded-media" }: { label: string; className?: string }) {
   const [pos, setPos] = useState(50);
   const id = useId();
 
   return (
-    <div className="relative overflow-hidden rounded-media select-none" style={{ aspectRatio: "4 / 5" }}>
+    <div className={`relative select-none overflow-hidden ${className}`} style={{ aspectRatio: "4 / 5" }}>
       {/* Nachher (base) */}
-      <div className="absolute inset-0 placeholder-surface" role="img" aria-label={`${label} – Nachher (Image Placeholder)`} />
+      <div className="absolute inset-0 placeholder-surface" role="img" aria-label={`${label}, Nachher (Bildplatzhalter)`} />
       {/* Vorher (clipped overlay) */}
       <div
         className="absolute inset-0 placeholder-surface--deep"
         style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
         role="img"
-        aria-label={`${label} – Vorher (Image Placeholder)`}
+        aria-label={`${label}, Vorher (Bildplatzhalter)`}
       />
 
       <span className="pointer-events-none absolute bottom-4 left-4 rounded-full bg-white/80 px-3 py-1 text-[0.6875rem] uppercase tracking-[0.18em] text-espresso backdrop-blur">

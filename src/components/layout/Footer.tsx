@@ -12,12 +12,12 @@ export function Footer() {
           <div>
             <Image src="/brand/logo-gold.png" alt={`${SITE.name} Logo`} width={224} height={130} className="h-14 w-auto" />
             <p className="mt-6 max-w-xs text-small text-taupe">
-              {SITE.tagline} an der Bahnhofstrasse – persönlich geführt von {SITE.owner.name}.
+              {SITE.tagline} an der Bahnhofstrasse, persönlich geführt von {SITE.owner.name}.
             </p>
           </div>
 
           <div>
-            <p className="eyebrow">Behandlungen</p>
+            <p className="text-small font-medium text-espresso">Behandlungen</p>
             <ul className="mt-5 space-y-2.5 text-small">
               {TREATMENTS.map((t) => (
                 <li key={t.slug}>
@@ -30,7 +30,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow">Studio</p>
+            <p className="text-small font-medium text-espresso">Studio</p>
             <address className="mt-5 space-y-1 text-small not-italic text-espresso/80">
               <p>{SITE.name}</p>
               <p>{SITE.address.street}</p>
@@ -51,7 +51,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow">Navigation</p>
+            <p className="text-small font-medium text-espresso">Navigation</p>
             <ul className="mt-5 space-y-2.5 text-small">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
@@ -62,7 +62,7 @@ export function Footer() {
               ))}
               <li>
                 <a href={SITE.bookingUrl} target="_blank" rel="noopener" className="text-champagne-deep hover:text-espresso">
-                  Termin buchen →
+                  Termin buchen
                 </a>
               </li>
             </ul>
@@ -71,7 +71,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 text-[0.8125rem] text-taupe sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {SITE.name} · {SITE.tagline}
+            © {year} {SITE.name}, {SITE.tagline}
           </p>
           {/* PLACEHOLDER: legal pages */}
           <ul className="flex gap-6">

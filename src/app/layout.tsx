@@ -9,7 +9,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Kosmetikstudio Zürich – Beauty Face Lift | Bahnhofstrasse",
+    default: "Kosmetikstudio Zürich | Beauty Face Lift, Bahnhofstrasse",
     template: "%s | Beauty Face Lift Zürich",
   },
   description: SITE.description,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     locale: SITE.locale,
     siteName: SITE.name,
     url: SITE.url,
-    title: "Beauty Face Lift – Kosmetikstudio Zürich",
+    title: "Beauty Face Lift, Kosmetikstudio Zürich",
     description: SITE.description,
     // PLACEHOLDER: add /og.jpg (1200×630) once photography exists
   },
@@ -40,6 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="de-CH" className={fontVariables}>
       <body>
+        <div id="top-sentinel" aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-6" />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-espresso focus:px-5 focus:py-3 focus:text-ivory"

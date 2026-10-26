@@ -21,10 +21,30 @@ Messbare Ziele:
 3. Eindeutige Repräsentation in AI-Suchen (GEO).
 
 ## Design Direction
-- Hell, warm und ruhig. **Whitespace vor Elementen.** Hierarchie entsteht über die Grösse der Serif-Schrift, nicht über Farbe.
-- Gold bzw. Champagne ist **Akzent, nie Fläche**: Linien, Icons, Ornamente, ein Wort pro Headline.
+- Hell, warm und ruhig. **Whitespace vor Elementen.** Hierarchie entsteht über die Grösse der leichten Display-Schrift, nicht über Effekte.
+- Gold bzw. Champagne ist **Akzent, nie Fläche**: Primärbutton, Icons, feine Linien.
 - Editoriale Bildsprache, später echte Fotos von Teresa, dem Studio und Haut-Details. Formate: Hero und Portraits 4:5, Studio 16:10, Cards 4:5. Keine Stockgesichter.
-- Wiederkehrendes Muster aus dem Brand Sheet: **Eyebrow-Label (Versalien, weit gesperrt) → kurze Goldlinie → Serif-Headline**.
+- Komponenten-Sprache (Referenz: Pinterest-Moodboard „Luméra“, Awwwards Beauty in Stem/Koba):
+  - **Gerahmter Hero**: Bildfläche als abgerundeter Rahmen, leicht vom Viewport eingerückt, Copy liegt unten links auf dem Bild, Fakten als schwebende Karten rechts.
+  - **Split-Navigation**: Links links, Logo zentriert, „Termin buchen“ rechts. Unter `xl` runder Menü-Button.
+  - **Cut-out-Cards** (`.notch`): Info-Panel sitzt in der Ecke des Bildes und teilt den Seitenhintergrund, runder Pfeil-Button darin.
+  - **Bento statt gleicher Karten**: Behandlungen in einem 12er-Raster mit unterschiedlichen Grössen und Tönen.
+  - **Typografische Komposition**: Headline um ein Portrait herum gesetzt (Über Teresa), zweifarbig (Espresso + Espresso/40) statt kursivem Gold-Akzent.
+  - **Rahmen-Klammer**: Hero und Final CTA sind beide gerahmte Flächen und klammern die Seite.
+
+## Kein AI-Slop (verbindlich)
+Die Seite darf an keiner Stelle nach „von einer KI generiert“ aussehen. Grundlage ist der Skill `design-taste-frontend` (Pre-Flight-Check vor jeder Abgabe). Konkret verboten:
+- **Gedankenstriche** (– und —) in sichtbarem Text, Alt-Texten und Meta-Daten. Stattdessen Punkt, Komma oder Doppelpunkt. Bereiche mit Bindestrich (`09:00-19:00`).
+- **Eyebrow über jeder Section.** Max. 1 Versalien-Label pro 3 Sections (aktuell: Hero, Treatment Finder, Studio).
+- **Goldlinie unter Labels**, **kursives Gold-Akzentwort** in Headlines, `01/02`-Nummerierungen, dekorative Punkte, Mittelpunkt-Ketten (`a · b · c`).
+- **Slogan-Fragmente** im Dreierrhythmus („Echte Haut. Echte Veränderung.“), erfundene Zitate, Füllwörter (einzigartig, exklusiv, ganzheitlich, Reise, entdecken Sie die Welt …). Headlines sagen sachlich, was die Section zeigt.
+- **Drei gleiche Karten nebeneinander**, gleiches Layout in zwei Sections, mehr als zwei Bild-Text-Zickzacks hintereinander.
+- **Wasserzeichen, Glow-Verläufe, Platzhalter-Monogramme**, Pills auf Bildern (Ausnahme: funktionale Labels wie „Vorher/Nachher“).
+- **Mehrere Labels für dieselbe Absicht.** Buchen heisst immer „Termin buchen“, Kontakt immer „Beratung anfragen“.
+- `window.addEventListener("scroll")`. Scroll-Zustände nur über IntersectionObserver oder CSS `animation-timeline`.
+- Zitate länger als 3 Zeilen, Attribution mit Gedankenstrich.
+
+Erlaubte Ausnahmen (bewusst, vom Briefing vorgegeben): warme Ivory/Champagne-Palette (Brand Sheet), Fakten im Hero (Kundenwunsch, als schwebende Karten gelöst).
 
 ## Farbpalette (Tokens in `src/app/globals.css`)
 | Token | Hex | Verwendung |
@@ -40,10 +60,24 @@ Messbare Ziele:
 Warum `champagne-deep`: Weiss auf #C8A982 erreicht nur ~2.2:1 Kontrast. Der tiefere Ton hält das Gold-Gefühl und erreicht ~5:1.
 
 ## Typography
-- **Playfair Display** für Headlines (400, kursiv als Akzent). **Inter** für Text (400/500).
-- Eingebunden via `next/font`: self-hosted, `display: swap`, keine Requests zu Google.
-- Fluid Type Scale (`clamp`): `display`, `h1`, `h2`, `h3`, `lead`, `body`, `small`, `eyebrow`.
+- **Outfit** (200/300/400) für Headlines: leichte, geometrische Display-Schrift, gross, eng gesperrt (-0.035 bis -0.045em), kompakter Zeilenabstand (0.94 bis 1.02). Wirkt edel durch Leichtigkeit, modern durch die Sans-Form.
+- **Manrope** (Variable 200-800) für Fliesstext und UI.
+- Bewusst **keine Serifenschrift** mehr: Playfair wirkte klassisch und ist ein typischer AI-Default. Die Serif lebt nur noch im Logo-Monogramm.
+- Self-hosted via `next/font/local` (Dateien in `src/fonts`, SIL OFL), `display: swap`, metrisch angepasste Fallbacks, kein CLS.
+- Betonung über **Farbe derselben Schrift** (Espresso / Espresso 40 %), nie über Kursiv oder Schriftmix.
+- Fluid Type Scale (`clamp`): `display`, `h1`, `h2`, `h3`, `lead`, `body` (15 px), `small` (13 px), `eyebrow`.
 - Headlines mit `text-wrap: balance`, Fliesstext höchstens ~60 Zeichen breit (`max-w-prose-narrow`).
+
+## Karten-Form (verbindlich)
+Jede Karte nutzt `ui/ShapedCard`: abgerundete Karte mit **ausgestufter Ecke oben rechts** (wie ein Register-Tab), optional zusätzlich **unten links** für die Bildunterschrift. Vorbild ist das Pinterest-Moodboard.
+- Die Stufe oben rechts trägt etwas Sinnvolles: runden Pfeil-Button (`CornerButton`), ein Label (Behandlung, „Unsere Empfehlung“) oder bleibt als reine Form leer.
+- `surface` muss die Farbe hinter der Karte sein (`--color-ivory`, `--color-beige-soft`, `--color-white`, `--color-beige`).
+- Ausnahme: kleine Info-Karten, die direkt auf einem Foto liegen (Hero), da dort keine Fläche für die Stufe existiert.
+
+## Spacing & Rahmen
+- Sections mit eigener Fläche (Hero, Treatment Finder, Ergebnisse, Studio, Final CTA) sind **gerahmte Panels**: `rounded-panel` (32 px), Abstand zum Viewport `--spacing-frame` (8-14 px).
+- Section-Abstand `py-section` = 72-120 px (vorher bis 160 px, wirkte leer und generisch).
+- Radius-Skala: `rounded-sm` 12 px (kleine Labels), `rounded-card` 24 px, `rounded-media` 28 px, `rounded-panel` 32 px, Buttons und Chips `rounded-full`.
 
 ## UX-Prinzipien
 1. Eine Aussage pro Section, ein Primär-CTA pro Viewport.
@@ -83,14 +117,14 @@ src/
     content.ts    Treatments, Finder-Mapping, Reviews, Ergebnisse, FAQ
     schema.ts     JSON-LD-Builder (BeautySalon, Person, Service, FAQPage, Breadcrumb)
   components/
-    ui/           Button, SectionHeading, ImagePlaceholder, Icon, Stars, JsonLd, Reveal
-    layout/       Navbar (inkl. Mobile-Menü und Mobile-Booking-Bar), Footer
-    sections/     Hero, TrustBar, TrustItem, Treatments, TreatmentCard, PriceList,
-                  TreatmentFinder, AboutTeresa, Results, BeforeAfter, Reviews,
-                  ReviewCard, Studio, FAQ, FAQItem, CTASection
+    ui/           Button, SectionHeading, ShapedCard (+ CornerButton), ImagePlaceholder, Icon, Stars, JsonLd, RevealObserver
+    layout/       Navbar (Split-Nav, Mobile-Menü, Mobile-Booking-Bar), Footer
+    sections/     Hero (gerahmt, FloatCards), TrustBar, Treatments (Bento + Preisliste),
+                  TreatmentCard (Cut-out-Corner), TreatmentFinder, AboutTeresa (Typo-Komposition),
+                  Results (Tabs + BeforeAfter), Reviews, Studio, FAQ, CTASection (gerahmt)
 ```
 Regeln:
-- **Server Components by default.** `"use client"` nur dort, wo es nötig ist: Navbar, TreatmentFinder, BeforeAfter, ReviewsCarousel, RevealObserver.
+- **Server Components by default.** `"use client"` nur dort, wo es nötig ist: Navbar, TreatmentFinder, Results, BeforeAfter, Reviews, RevealObserver.
 - Inhalte gehören in `lib/content.ts`, nie hardcoded in Komponenten.
 
 ## Animation Principles
@@ -101,7 +135,7 @@ Luxury = restraint.
 - Image Reveal (clip-path, 1200 ms)
 - Leichtes Parallax nur im Hero-Bild, umgesetzt per CSS `animation-timeline: view()` ohne JS
 - Hover: Bild-Scale ≤ 1.03, Pfeil-Shift 4 px
-- Sticky-Nav-Transition
+- Sticky-Nav-Transition (Zustand via IntersectionObserver auf `#top-sentinel`, `[data-hero]`, `[data-final-cta]`)
 
 **Easing und Steuerung**
 - Easing: `--ease-luxe: cubic-bezier(.22,1,.36,1)`
@@ -130,7 +164,7 @@ Luxury = restraint.
 - Treatment Finder: Hautanliegen → empfohlene Behandlung (mit Begründung, Dauer, Preis) → „Diese Behandlung buchen“ oder „Mehr erfahren“.
 
 ## SEO Strategy
-- Eine H1 pro Seite. Die Startseite kombiniert Keyword-Eyebrow und Claim: „Kosmetikstudio in Zürich – Ihre Haut. Ihre Schönheit. Ihre Zeit.“
+- Eine H1 pro Seite. Die Startseite kombiniert Keyword-Eyebrow und Claim: „Kosmetikstudio in Zürich. Ihre Haut. Ihre Schönheit. Ihre Zeit.“
 - Danach H2 pro Section, H3 für Cards.
 - Pro Seite: Metadata (Title-Template, Description, Canonical, Open Graph, Twitter), dazu `sitemap.ts` und `robots.ts`.
 - Keyword-Cluster:
@@ -171,6 +205,10 @@ Luxury = restraint.
 4. Reviews als Scroll-Snap-Karussell statt Plugin. Ein grosses Rating-Statement steht daneben.
 5. FAQ mit nativem `<details>`: kein JS, SEO-freundlich.
 6. Alle Bildflächen sind `ImagePlaceholder` mit Seitenverhältnis und Motivbeschreibung. Sie werden später 1:1 durch `next/image` ersetzt.
+
+## Offene technische Punkte
+- **Icons**: noch eigene Inline-SVGs (`ui/Icon.tsx`). Laut Anti-Slop-Regel durch `@phosphor-icons/react` (Light, stroke 1.5) ersetzen, sobald `npm install` möglich ist.
+- **Dark Mode**: bewusst nicht umgesetzt. Die Marke ist laut Brand Sheet hell (Warm Ivory dominant).
 
 ## Platzhalter (vor Livegang ersetzen)
 Alle Stellen sind im Code mit `PLACEHOLDER` markiert, Suche: `grep -rn PLACEHOLDER src`.

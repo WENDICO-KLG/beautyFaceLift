@@ -17,45 +17,48 @@
   --color-white: #ffffff;
   --color-line: #e3d8cb;
 
-  /* Fonts (CSS vars injected by next/font in layout.tsx) */
-  --font-serif: var(--font-playfair, "Playfair Display"), "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-inter, "Inter"), "Inter", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  /* Fonts (CSS vars injected by next/font/local, see src/lib/fonts.ts) */
+  --font-display: var(--font-outfit, "Outfit"), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-manrope, "Manrope"), system-ui, -apple-system, "Helvetica Neue", sans-serif;
 
-  /* Fluid type scale */
-  --text-display: clamp(2.75rem, 1.5rem + 3.8vw, 5.25rem);
-  --text-display--line-height: 1.02;
-  --text-display--letter-spacing: -0.02em;
-  --text-h1: clamp(2.5rem, 1.7rem + 3.2vw, 4.5rem);
-  --text-h1--line-height: 1.05;
-  --text-h1--letter-spacing: -0.015em;
-  --text-h2: clamp(2rem, 1.45rem + 2.2vw, 3.5rem);
-  --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.01em;
-  --text-h3: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
-  --text-h3--line-height: 1.2;
-  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
-  --text-lead--line-height: 1.65;
-  --text-body: 1rem;
-  --text-body--line-height: 1.7;
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.6;
+  /* Fluid type scale: light display, tight tracking, compact leading */
+  --text-display: clamp(3.25rem, 1.4rem + 6vw, 7rem);
+  --text-display--line-height: 0.94;
+  --text-display--letter-spacing: -0.045em;
+  --text-h1: clamp(2.75rem, 1.6rem + 4vw, 5.25rem);
+  --text-h1--line-height: 0.98;
+  --text-h1--letter-spacing: -0.04em;
+  --text-h2: clamp(2.25rem, 1.6rem + 2.5vw, 3.875rem);
+  --text-h2--line-height: 1.02;
+  --text-h2--letter-spacing: -0.035em;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.5vw, 1.625rem);
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.02em;
+  --text-lead: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lead--line-height: 1.6;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.65;
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.55;
   --text-eyebrow: 0.6875rem;
   --text-eyebrow--line-height: 1.4;
-  --text-eyebrow--letter-spacing: 0.22em;
+  --text-eyebrow--letter-spacing: 0.16em;
 
-  /* Spacing additions */
-  --spacing-section: clamp(5rem, 3.5rem + 6vw, 10rem);
+  /* Spacing */
+  --spacing-section: clamp(4.5rem, 3rem + 4vw, 7.5rem);
   --spacing-gutter: clamp(1.25rem, 0.6rem + 2.8vw, 3rem);
+  --spacing-frame: clamp(0.5rem, 0.3rem + 0.6vw, 0.875rem); /* inset of framed panels */
 
   /* Containers */
   --container-site: 77.5rem; /* 1240px */
   --container-narrow: 56rem;
-  --container-prose-narrow: 34rem;
+  --container-prose-narrow: 32rem;
 
-  /* Radius */
-  --radius-sm: 0.5rem;
-  --radius-card: 1rem;
-  --radius-media: 1.25rem;
+  /* Radius: one soft scale. Buttons are pills. */
+  --radius-sm: 0.75rem;
+  --radius-card: 1.5rem;
+  --radius-media: 1.75rem;
+  --radius-panel: 2rem;
 
   /* Shadows – used sparingly, borders first */
   --shadow-soft: 0 1px 2px rgb(33 28 25 / 0.04), 0 12px 32px -12px rgb(33 28 25 / 0.12);
@@ -93,15 +96,16 @@
     color: var(--color-espresso);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.7;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif);
-    font-weight: 400;
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    font-weight: 300;
     text-wrap: balance;
   }
+  h3, h4 { font-weight: 400; }
   p { text-wrap: pretty; }
   em { font-style: italic; }
   [id] { scroll-margin-top: 6rem; }
@@ -132,26 +136,61 @@
   color: var(--color-champagne-deep);
 }
 
-@utility gold-rule {
-  display: block;
-  width: 2.5rem;
-  height: 1px;
-  background: var(--color-champagne);
-}
-
 /* --------------------------------------------------------------------------
    Image placeholder surface
    -------------------------------------------------------------------------- */
-.placeholder-surface {
-  background:
-    radial-gradient(120% 80% at 20% 10%, rgb(255 255 255 / 0.55), transparent 60%),
-    linear-gradient(160deg, var(--color-beige-soft), var(--color-beige));
+.placeholder-surface { background: var(--color-beige); }
+.placeholder-surface--deep { background: #d9cab8; }
+.placeholder-surface--light { background: var(--color-beige-soft); }
+
+/* --------------------------------------------------------------------------
+   Cut corners (brand card shape)
+   A corner block in the page colour is laid over the card corner, plus two
+   concave fillets, so the card reads as one shape with a stepped corner
+   (like a folder tab). Set --cut-bg to the colour of the surrounding surface.
+     .cut-tr  stepped top-right corner (holds a button, badge or nothing)
+     .cut-bl  stepped bottom-left corner (holds the card caption)
+   -------------------------------------------------------------------------- */
+.cut-tr,
+.cut-bl {
+  --cut-r: 1.25rem;
+  position: absolute;
+  z-index: 1;
+  background: var(--cut-bg, var(--color-ivory));
 }
-.placeholder-surface--deep {
-  background:
-    radial-gradient(120% 80% at 80% 0%, rgb(255 255 255 / 0.35), transparent 60%),
-    linear-gradient(160deg, #e2d5c6, #d6c6b4);
+.cut-tr::before,
+.cut-tr::after,
+.cut-bl::before,
+.cut-bl::after {
+  content: "";
+  position: absolute;
+  width: var(--cut-r);
+  height: var(--cut-r);
+  pointer-events: none;
 }
+/* -1px overlap hides sub-pixel seams on scaled / transformed cards */
+.cut-tr {
+  top: -1px;
+  right: -1px;
+  border-bottom-left-radius: var(--cut-r);
+}
+.cut-tr::before,
+.cut-tr::after {
+  background: radial-gradient(circle at 0 100%, transparent calc(var(--cut-r) - 0.5px), var(--cut-bg, var(--color-ivory)) var(--cut-r));
+}
+.cut-tr::before { top: 0; right: 100%; }
+.cut-tr::after { top: 100%; right: 0; }
+.cut-bl {
+  bottom: -1px;
+  left: -1px;
+  border-top-right-radius: var(--cut-r);
+}
+.cut-bl::before,
+.cut-bl::after {
+  background: radial-gradient(circle at 100% 0, transparent calc(var(--cut-r) - 0.5px), var(--cut-bg, var(--color-ivory)) var(--cut-r));
+}
+.cut-bl::before { left: 0; bottom: 100%; }
+.cut-bl::after { left: 100%; bottom: 0; }
 
 /* --------------------------------------------------------------------------
    Reveal animations (activated only when JS has run → content never hidden)

@@ -26,9 +26,9 @@ export const TREATMENTS: Treatment[] = [
     slug: "hydra4face",
     name: "Hydra4Face",
     kicker: "Tiefenreinigung & Glow",
-    short: "Reinigt, peelt und versorgt die Haut in einem Schritt mit Feuchtigkeit – für sofort sichtbare Frische.",
+    short: "Reinigt, peelt und versorgt die Haut in einem Schritt mit Feuchtigkeit. Die Frische ist sofort sichtbar.",
     intro:
-      "Hydra4Face ist unsere Aquafacial-Behandlung: Die Haut wird mit Wasserstrahl-Technologie sanft gereinigt, porentief geklärt und anschliessend mit Wirkstoffseren intensiv durchfeuchtet. Das Ergebnis ist ein ebenmässiger, praller Teint – ohne Ausfallzeit.",
+      "Hydra4Face ist unsere Aquafacial-Behandlung: Die Haut wird mit Wasserstrahl-Technologie sanft gereinigt, porentief geklärt und anschliessend mit Wirkstoffseren intensiv durchfeuchtet. Das Ergebnis ist ein ebenmässiger, praller Teint ohne Ausfallzeit.",
     durationMin: 75,
     priceFrom: 190,
     benefits: ["Sofortiger Glow", "Porentiefe Reinigung", "Intensive Feuchtigkeit", "Keine Ausfallzeit"],
@@ -39,9 +39,9 @@ export const TREATMENTS: Treatment[] = [
       { title: "Extraktion", text: "Schmerzarme Absaugung von Unreinheiten." },
       { title: "Infusion", text: "Einschleusen von Hyaluron, Antioxidantien und Peptiden." },
     ],
-    imageLabel: "Hydra4Face – Behandlung mit Handstück, Detailaufnahme",
+    imageLabel: "Hydra4Face: Behandlung mit Handstück, Detailaufnahme",
     seo: {
-      title: "Hydra4Face Zürich – Aquafacial an der Bahnhofstrasse",
+      title: "Hydra4Face Zürich: Aquafacial an der Bahnhofstrasse",
       description:
         "Hydra4Face (Aquafacial/HydraFacial-Prinzip) in Zürich: Tiefenreinigung, Peeling und Feuchtigkeit in einer Behandlung. Persönlich bei Beauty Face Lift, Bahnhofstrasse 94.",
     },
@@ -64,9 +64,9 @@ export const TREATMENTS: Treatment[] = [
       { title: "Needling", text: "Präzise Behandlung mit sterilen Einweg-Modulen." },
       { title: "Beruhigung", text: "Kühlende Maske und Pflege für die Regeneration." },
     ],
-    imageLabel: "Microneedling – Nahaufnahme Hautstruktur",
+    imageLabel: "Microneedling: Nahaufnahme Hautstruktur",
     seo: {
-      title: "Microneedling Zürich – Kollagen-Behandlung an der Bahnhofstrasse",
+      title: "Microneedling Zürich: Kollagen-Behandlung an der Bahnhofstrasse",
       description:
         "Microneedling in Zürich bei Beauty Face Lift: verfeinerte Poren, glattere Hautstruktur und mehr Festigkeit. Persönliche Beratung und Behandlung durch Teresa Stimac.",
     },
@@ -78,7 +78,7 @@ export const TREATMENTS: Treatment[] = [
     kicker: "Klares Hautbild",
     short: "Löst abgestorbene Hautschüppchen, mildert Pigmentflecken und schenkt einen ebenmässigen Teint.",
     intro:
-      "Das Fruchtsäurepeeling (AHA) löst verhornte Hautzellen und regt die Zellerneuerung an. Unreinheiten, Pigmentierungen und erste Linien werden gemildert – die Haut wirkt klarer, glatter und strahlender. Die Konzentration wird individuell auf Ihre Haut abgestimmt.",
+      "Das Fruchtsäurepeeling (AHA) löst verhornte Hautzellen und regt die Zellerneuerung an. Unreinheiten, Pigmentierungen und erste Linien werden gemildert, die Haut wirkt klarer, glatter und strahlender. Die Konzentration wird individuell auf Ihre Haut abgestimmt.",
     durationMin: 45,
     priceFrom: 140,
     benefits: ["Ebenmässiger Teint", "Weniger Unreinheiten", "Mildert Pigmentflecken", "Glattere Haut"],
@@ -89,9 +89,9 @@ export const TREATMENTS: Treatment[] = [
       { title: "Peeling", text: "Kontrollierte Einwirkzeit unter Beobachtung." },
       { title: "Neutralisation", text: "Beruhigende Pflege und Sonnenschutz." },
     ],
-    imageLabel: "Fruchtsäurepeeling – Auftragen mit Pinsel",
+    imageLabel: "Fruchtsäurepeeling: Auftragen mit Pinsel",
     seo: {
-      title: "Fruchtsäurepeeling Zürich – AHA-Peeling für klare Haut",
+      title: "Fruchtsäurepeeling Zürich: AHA-Peeling für klare Haut",
       description:
         "Fruchtsäurepeeling in Zürich bei Beauty Face Lift: mildert Unreinheiten und Pigmentflecken für einen ebenmässigen Teint. Individuell abgestimmt, Bahnhofstrasse 94.",
     },
@@ -103,7 +103,7 @@ export const TREATMENTS: Treatment[] = [
     kicker: "Regeneration & Anti-Aging",
     short: "Kaltes Plasma wirkt antibakteriell, stärkt die Regeneration und unterstützt eine straffere Haut.",
     intro:
-      "ColdPLASMA nutzt ionisiertes, kaltes Plasma. Es wirkt antibakteriell, verbessert die Aufnahme von Wirkstoffen und unterstützt die Regeneration der Haut. Ideal bei Unreinheiten, empfindlicher Haut und als Anti-Aging-Booster – sanft und ohne Ausfallzeit.",
+      "ColdPLASMA nutzt ionisiertes, kaltes Plasma. Es wirkt antibakteriell, verbessert die Aufnahme von Wirkstoffen und unterstützt die Regeneration der Haut. Ideal bei Unreinheiten, empfindlicher Haut und als Anti-Aging-Booster. Sanft und ohne Ausfallzeit.",
     durationMin: 60,
     priceFrom: 260,
     benefits: ["Antibakteriell", "Stärkt die Regeneration", "Bessere Wirkstoffaufnahme", "Sanft & schmerzfrei"],
@@ -111,12 +111,12 @@ export const TREATMENTS: Treatment[] = [
     process: [
       { title: "Beratung", text: "Hautanalyse und individuelle Behandlungsplanung." },
       { title: "Reinigung", text: "Sanfte Vorbereitung der Haut." },
-      { title: "Plasma", text: "Behandlung mit kaltem Plasma – kaum spürbar." },
+      { title: "Plasma", text: "Behandlung mit kaltem Plasma, kaum spürbar." },
       { title: "Wirkstoffe", text: "Einschleusen passender Seren und Abschlusspflege." },
     ],
-    imageLabel: "ColdPLASMA – Gerät im Studio, ruhige Lichtstimmung",
+    imageLabel: "ColdPLASMA: Gerät im Studio, ruhige Lichtstimmung",
     seo: {
-      title: "ColdPLASMA Zürich – Kaltplasma-Behandlung fürs Gesicht",
+      title: "ColdPLASMA Zürich: Kaltplasma-Behandlung fürs Gesicht",
       description:
         "ColdPLASMA in Zürich bei Beauty Face Lift: antibakteriell, regenerierend und ideal bei Unreinheiten oder als Anti-Aging-Booster. Persönlich an der Bahnhofstrasse 94.",
     },
@@ -131,9 +131,9 @@ export const getTreatment = (slug: string) => TREATMENTS.find((t) => t.slug === 
 /* ------------------------------------------------------------------------ */
 // PLACEHOLDER: full price list to be confirmed
 export const PRICE_EXTRAS = [
-  { name: "Persönliche Hautanalyse & Beratung", durationMin: 30, price: 0, note: "Kostenlos bei Buchung" },
+  { name: "Hautanalyse", durationMin: 30, price: 0 },
   { name: "Klassische Gesichtsbehandlung", durationMin: 75, price: 160 },
-  { name: "Microneedling – Kur à 3 Behandlungen", durationMin: 60, price: 590, note: "pro Kur" },
+  { name: "Microneedling-Kur (3x)", durationMin: 180, price: 590, note: "3 × 60 Min" },
 ];
 
 /* ------------------------------------------------------------------------ */
@@ -159,7 +159,7 @@ export const CONCERNS: Concern[] = [
     icon: "circle-dots",
     recommendation: "fruchtsaeurepeeling",
     alternative: "coldplasma",
-    reason: "Fruchtsäure klärt verstopfte Poren und reguliert die Verhornung – ColdPLASMA wirkt zusätzlich antibakteriell.",
+    reason: "Fruchtsäure klärt verstopfte Poren und reguliert die Verhornung. ColdPLASMA wirkt zusätzlich antibakteriell.",
   },
   {
     id: "falten",
@@ -167,7 +167,7 @@ export const CONCERNS: Concern[] = [
     icon: "moon",
     recommendation: "microneedling",
     alternative: "coldplasma",
-    reason: "Microneedling aktiviert die körpereigene Kollagenbildung – die Haut wird über die Kur sichtbar fester und glatter.",
+    reason: "Microneedling aktiviert die körpereigene Kollagenbildung. Die Haut wird über die Kur sichtbar fester und glatter.",
   },
   {
     id: "pigment",
@@ -182,7 +182,7 @@ export const CONCERNS: Concern[] = [
     label: "Trockene Haut",
     icon: "drop",
     recommendation: "hydra4face",
-    reason: "Hydra4Face schleust Hyaluron und Feuchtigkeit tief in die Haut – spürbar weicher und praller ab der ersten Behandlung.",
+    reason: "Hydra4Face schleust Hyaluron und Feuchtigkeit tief in die Haut. Sie fühlt sich spürbar weicher und praller an, schon ab der ersten Behandlung.",
   },
   {
     id: "poren",
@@ -205,7 +205,7 @@ export const CONCERNS: Concern[] = [
     label: "Ich bin unsicher",
     icon: "question",
     recommendation: null,
-    reason: "Kein Problem – in einer persönlichen Hautanalyse finden wir gemeinsam die Behandlung, die wirklich zu Ihrer Haut passt.",
+    reason: "In einer persönlichen Hautanalyse finden wir gemeinsam die Behandlung, die wirklich zu Ihrer Haut passt.",
   },
 ];
 
@@ -215,7 +215,7 @@ export const CONCERNS: Concern[] = [
 export const TERESA_PILLARS = [
   {
     title: "Erfahrung",
-    text: "Seit über 20 Jahren widmet sich Teresa der Gesichts- und Hautpflege – mit stetiger Weiterbildung in modernsten Methoden.",
+    text: "Seit über 20 Jahren widmet sich Teresa der Gesichts- und Hautpflege und bildet sich laufend in neuen Methoden weiter.",
   },
   {
     title: "Philosophie",
@@ -258,7 +258,7 @@ export const RESULTS: { treatment: TreatmentSlug; title: string; text: string; o
 /* ------------------------------------------------------------------------ */
 /* Reviews                                                                  */
 /* ------------------------------------------------------------------------ */
-// PLACEHOLDER: example texts – replace with real Treatwell reviews (with permission)
+// PLACEHOLDER: example texts, replace with real Treatwell reviews (with permission)
 export const REVIEWS = [
   {
     quote: "Wie immer eine wunderbare Verwöhnzeit. Teresa nimmt sich Zeit, erklärt alles und meine Haut sieht danach jedes Mal fantastisch aus.",
@@ -271,7 +271,7 @@ export const REVIEWS = [
     treatment: "Microneedling",
   },
   {
-    quote: "Ein ruhiger, eleganter Ort mitten an der Bahnhofstrasse. Die Beratung war ehrlich – ich habe genau das bekommen, was meine Haut braucht.",
+    quote: "Ein ruhiger, eleganter Ort mitten an der Bahnhofstrasse. Die Beratung war ehrlich und genau richtig für meine Haut.",
     name: "Nadine K.",
     treatment: "Hautanalyse",
   },
@@ -297,7 +297,7 @@ export const FAQS = [
   },
   {
     q: "Ist die Behandlung schmerzhaft?",
-    a: "Die meisten Behandlungen sind sehr angenehm und entspannend. Beim Microneedling spüren Sie ein leichtes Kribbeln – auf Wunsch arbeiten wir mit einer betäubenden Creme.",
+    a: "Die meisten Behandlungen sind sehr angenehm und entspannend. Beim Microneedling spüren Sie ein leichtes Kribbeln. Auf Wunsch arbeiten wir mit einer betäubenden Creme.",
   },
   {
     q: "Wie oft sollte man Microneedling machen?",
@@ -305,7 +305,7 @@ export const FAQS = [
   },
   {
     q: "Was kostet eine Behandlung?",
-    a: "Unsere Behandlungen beginnen ab CHF 140. Alle Preise finden Sie transparent in unserer Preisliste – ohne versteckte Kosten.",
+    a: "Unsere Behandlungen beginnen ab CHF 140. Alle Preise finden Sie transparent in unserer Preisliste, ohne versteckte Kosten.",
   },
   {
     q: "Welche Behandlung ist für meine Haut geeignet?",
@@ -313,14 +313,14 @@ export const FAQS = [
   },
   {
     q: "Wie sollte ich mich auf die Behandlung vorbereiten?",
-    a: "Verzichten Sie 3–5 Tage vorher auf Retinol, starke Peelings und intensive Sonne. Kommen Sie wenn möglich ungeschminkt – alles Weitere besprechen wir vor Ort.",
+    a: "Verzichten Sie 3 bis 5 Tage vorher auf Retinol, starke Peelings und intensive Sonne. Kommen Sie wenn möglich ungeschminkt. Alles Weitere besprechen wir vor Ort.",
   },
   {
     q: "Kann ich direkt nach der Behandlung arbeiten?",
-    a: "Nach Hydra4Face, Fruchtsäurepeeling und ColdPLASMA ja. Nach dem Microneedling kann die Haut 24–48 Stunden leicht gerötet sein – planen Sie wichtige Termine am besten nicht direkt danach.",
+    a: "Nach Hydra4Face, Fruchtsäurepeeling und ColdPLASMA ja. Nach dem Microneedling kann die Haut 24 bis 48 Stunden leicht gerötet sein. Planen Sie wichtige Termine am besten nicht direkt danach.",
   },
   {
     q: "Muss ich vorher einen Beratungstermin vereinbaren?",
-    a: "Nicht zwingend. Sie können direkt eine Behandlung buchen – die Hautanalyse ist immer Teil Ihres ersten Termins. Bei Unsicherheit beraten wir Sie gerne vorab.",
+    a: "Nicht zwingend. Sie können direkt eine Behandlung buchen, die Hautanalyse ist immer Teil Ihres ersten Termins. Bei Unsicherheit beraten wir Sie gerne vorab.",
   },
 ];

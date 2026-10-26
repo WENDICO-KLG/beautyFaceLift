@@ -6,6 +6,7 @@ import { SITE } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { ShapedCard } from "@/components/ui/ShapedCard";
 
 export function TreatmentFinder() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -13,7 +14,7 @@ export function TreatmentFinder() {
 
   const select = (id: string) => {
     setSelectedId(id);
-    // On small screens the result sits below the options – bring it into view
+    // On small screens the result sits below the options, bring it into view
     if (window.matchMedia("(max-width: 1023px)").matches) {
       requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
     }
@@ -23,17 +24,17 @@ export function TreatmentFinder() {
   const alternative = concern?.alternative ? getTreatment(concern.alternative) : undefined;
 
   return (
-    <section id="finder" className="bg-beige-soft py-section" aria-labelledby="finder-title">
+    <section id="finder" className="px-[var(--spacing-frame)]" aria-labelledby="finder-title">
+      <div className="rounded-panel bg-beige-soft py-section">
       <div className="container-site grid gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
           <div data-reveal="up">
             <p className="eyebrow">Treatment Finder</p>
-            <span className="gold-rule mt-5" aria-hidden="true" />
-            <h2 id="finder-title" className="mt-6 text-h2 text-espresso">
-              Was möchten Sie <em className="text-champagne-deep">verbessern?</em>
+            <h2 id="finder-title" className="mt-5 text-h2 text-espresso">
+              Was möchten Sie verbessern?
             </h2>
             <p className="mt-6 max-w-prose-narrow text-lead text-taupe">
-              Wählen Sie Ihr wichtigstes Hautanliegen – wir zeigen Ihnen die passende Behandlung.
+              Wählen Sie Ihr wichtigstes Hautanliegen. Wir zeigen Ihnen die passende Behandlung.
             </p>
           </div>
 
@@ -54,10 +55,6 @@ export function TreatmentFinder() {
                   >
                     <Icon name={c.icon} className={`size-5 shrink-0 ${active ? "text-champagne" : "text-champagne-deep"}`} />
                     <span className="flex-1">{c.label}</span>
-                    <span
-                      className={`size-2 rounded-full transition-colors ${active ? "bg-champagne" : "bg-transparent"}`}
-                      aria-hidden="true"
-                    />
                   </button>
                 </li>
               );
@@ -69,15 +66,23 @@ export function TreatmentFinder() {
         <div ref={resultRef} aria-live="polite" className="scroll-mt-24 lg:pt-6" data-reveal="up" style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
           {!concern && (
             <div className="flex h-full min-h-80 flex-col items-center justify-center rounded-card border border-dashed border-champagne/60 p-10 text-center">
-              <span className="font-serif text-[3.5rem] leading-none text-champagne">BF</span>
-              <p className="mt-6 max-w-xs text-small text-taupe">
+              <p className="max-w-xs text-small text-taupe">
                 Ihre persönliche Empfehlung erscheint hier, sobald Sie ein Hautanliegen gewählt haben.
               </p>
             </div>
           )}
 
           {concern && (
-            <article key={concern.id} className="animate-fade-up overflow-hidden rounded-card border border-line bg-white">
+            <ShapedCard
+              as="article"
+              key={concern.id}
+              surface="var(--color-beige-soft)"
+              className="animate-fade-up bg-white"
+              topRight={{
+                className: "pb-2 pl-3 pt-1",
+                children: <span className="block rounded-full bg-espresso px-4 py-2 text-[0.75rem] text-ivory">Unsere Empfehlung</span>,
+              }}
+            >
               <ImagePlaceholder
                 label={treatment ? treatment.imageLabel : "Persönliche Hautanalyse mit Teresa"}
                 ratio="16 / 9"
@@ -85,8 +90,7 @@ export function TreatmentFinder() {
                 reveal={false}
               />
               <div className="p-7 sm:p-10">
-                <p className="eyebrow">Unsere Empfehlung</p>
-                <h3 className="mt-3 text-h3 text-espresso">{treatment ? treatment.name : "Persönliche Hautanalyse"}</h3>
+                <h3 className="text-h3 text-espresso">{treatment ? treatment.name : "Persönliche Hautanalyse"}</h3>
                 <p className="mt-4 text-body text-taupe">{concern.reason}</p>
 
                 {treatment && (
@@ -117,10 +121,11 @@ export function TreatmentFinder() {
                   )}
                 </div>
               </div>
-            </article>
+            </ShapedCard>
           )}
         </div>
       </div>
+    </div>
     </section>
   );
 }
