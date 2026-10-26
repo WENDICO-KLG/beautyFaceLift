@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Beauty Face Lift – Design System
+   All tokens live here. Components only use these utilities.
+   ========================================================================== */
+
+@theme {
+  /* Colors */
+  --color-ivory: #f7f4ef;
+  --color-beige: #e8ded3;
+  --color-beige-soft: #f0e9e0;
+  --color-champagne: #c8a982;
+  --color-champagne-deep: #8b6b45;
+  --color-taupe: #76685d;
+  --color-espresso: #211c19;
+  --color-white: #ffffff;
+  --color-line: #e3d8cb;
+
+  /* Fonts (CSS vars injected by next/font in layout.tsx) */
+  --font-serif: var(--font-playfair, "Playfair Display"), "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter, "Inter"), "Inter", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+
+  /* Fluid type scale */
+  --text-display: clamp(2.75rem, 1.5rem + 3.8vw, 5.25rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.02em;
+  --text-h1: clamp(2.5rem, 1.7rem + 3.2vw, 4.5rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h2: clamp(2rem, 1.45rem + 2.2vw, 3.5rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --text-h3--line-height: 1.2;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.65;
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.6;
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  /* Spacing additions */
+  --spacing-section: clamp(5rem, 3.5rem + 6vw, 10rem);
+  --spacing-gutter: clamp(1.25rem, 0.6rem + 2.8vw, 3rem);
+
+  /* Containers */
+  --container-site: 77.5rem; /* 1240px */
+  --container-narrow: 56rem;
+  --container-prose-narrow: 34rem;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-card: 1rem;
+  --radius-media: 1.25rem;
+
+  /* Shadows – used sparingly, borders first */
+  --shadow-soft: 0 1px 2px rgb(33 28 25 / 0.04), 0 12px 32px -12px rgb(33 28 25 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(33 28 25 / 0.03), 0 24px 48px -20px rgb(33 28 25 / 0.18);
+
+  /* Motion */
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 300ms;
+  --duration-base: 600ms;
+  --duration-slow: 900ms;
+  --duration-reveal: 1200ms;
+  --animate-fade-up: fade-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translate3d(0, 12px, 0); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Breakpoints (Tailwind defaults kept explicit for documentation) */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  em { font-style: italic; }
+  [id] { scroll-margin-top: 6rem; }
+  ::selection { background: var(--color-beige); color: var(--color-espresso); }
+  :focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+@utility container-site {
+  width: 100%;
+  max-width: calc(var(--container-site) + 2 * var(--spacing-gutter));
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-champagne-deep);
+}
+
+@utility gold-rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-champagne);
+}
+
+/* --------------------------------------------------------------------------
+   Image placeholder surface
+   -------------------------------------------------------------------------- */
+.placeholder-surface {
+  background:
+    radial-gradient(120% 80% at 20% 10%, rgb(255 255 255 / 0.55), transparent 60%),
+    linear-gradient(160deg, var(--color-beige-soft), var(--color-beige));
+}
+.placeholder-surface--deep {
+  background:
+    radial-gradient(120% 80% at 80% 0%, rgb(255 255 255 / 0.35), transparent 60%),
+    linear-gradient(160deg, #e2d5c6, #d6c6b4);
+}
+
+/* --------------------------------------------------------------------------
+   Reveal animations (activated only when JS has run → content never hidden)
+   -------------------------------------------------------------------------- */
+.js [data-reveal] {
+  transition:
+    opacity var(--duration-slow) var(--ease-luxe),
+    transform var(--duration-slow) var(--ease-luxe),
+    clip-path var(--duration-reveal) var(--ease-luxe);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal="up"]:not(.is-visible) { opacity: 0; transform: translate3d(0, 24px, 0); }
+.js [data-reveal="fade"]:not(.is-visible) { opacity: 0; }
+.js [data-reveal="image"]:not(.is-visible) { clip-path: inset(12% 0 0 0 round var(--radius-media)); opacity: 0.4; }
+.js [data-reveal="image"].is-visible { clip-path: inset(0 0 0 0 round var(--radius-media)); }
+
+/* Subtle parallax on hero media – pure CSS, progressive enhancement */
+@supports (animation-timeline: view()) {
+  .parallax-media {
+    animation: parallax linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+  @keyframes parallax {
+    from { transform: translate3d(0, -4%, 0) scale(1.06); }
+    to { transform: translate3d(0, 4%, 0) scale(1.06); }
+  }
+}
+
+/* Hide scrollbars on snap rows while keeping them scrollable */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .parallax-media { animation: none !important; transform: none !important; }
+}
