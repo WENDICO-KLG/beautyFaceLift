@@ -25,7 +25,7 @@ const ITEMS: TrustItemProps[] = [
 
 export function TrustBar() {
   return (
-    <section aria-label="Warum Beauty Face Lift" className="border-y border-line bg-white/50">
+    <section aria-label="Warum Beauty Face Lift" className="border-y border-line bg-white/50 sm:hidden">
       <ul className="container-site grid grid-cols-2 gap-x-6 gap-y-8 py-10 lg:grid-cols-4 lg:divide-x lg:divide-line lg:py-12">
         {ITEMS.map((item) => (
           <TrustItem key={item.value} {...item} />

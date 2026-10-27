@@ -11,12 +11,16 @@ export type Treatment = {
   kicker: string;
   short: string;
   intro: string;
-  durationMin: number; // PLACEHOLDER
-  priceFrom: number; // PLACEHOLDER (CHF)
+  durationMin: number; // from beautyfacelift.ch price list (entry treatment)
+  priceFrom: number; // CHF, from beautyfacelift.ch price list
   benefits: string[];
   idealFor: string[];
   process: { title: string; text: string }[];
   imageLabel: string;
+  /** Photo in /public/images (see docs/image-credits.md). */
+  image?: string;
+  /** object-position to keep the subject in frame when cropped */
+  imagePosition?: string;
   seo: { title: string; description: string };
   related: TreatmentSlug[];
 };
@@ -29,8 +33,8 @@ export const TREATMENTS: Treatment[] = [
     short: "Reinigt, peelt und versorgt die Haut in einem Schritt mit Feuchtigkeit. Die Frische ist sofort sichtbar.",
     intro:
       "Hydra4Face ist unsere Aquafacial-Behandlung: Die Haut wird mit Wasserstrahl-Technologie sanft gereinigt, porentief geklärt und anschliessend mit Wirkstoffseren intensiv durchfeuchtet. Das Ergebnis ist ein ebenmässiger, praller Teint ohne Ausfallzeit.",
-    durationMin: 75,
-    priceFrom: 190,
+    durationMin: 60,
+    priceFrom: 180,
     benefits: ["Sofortiger Glow", "Porentiefe Reinigung", "Intensive Feuchtigkeit", "Keine Ausfallzeit"],
     idealFor: ["Fahle, müde Haut", "Trockene Haut", "Vor besonderen Anlässen"],
     process: [
@@ -39,7 +43,9 @@ export const TREATMENTS: Treatment[] = [
       { title: "Extraktion", text: "Schmerzarme Absaugung von Unreinheiten." },
       { title: "Infusion", text: "Einschleusen von Hyaluron, Antioxidantien und Peptiden." },
     ],
-    imageLabel: "Hydra4Face: Behandlung mit Handstück, Detailaufnahme",
+    imageLabel: "Hydra4Face-Behandlung mit Hydro-Handstück an der Wange",
+    image: "/images/lux-hydra4face.jpg",
+    imagePosition: "50% 40%",
     seo: {
       title: "Hydra4Face Zürich: Aquafacial an der Bahnhofstrasse",
       description:
@@ -55,7 +61,7 @@ export const TREATMENTS: Treatment[] = [
     intro:
       "Beim Microneedling setzen feinste Nadeln kontrollierte Mikroimpulse in der Haut. Diese aktivieren die natürliche Regeneration und Kollagenbildung. Über eine Behandlungsserie werden Hautstruktur, Poren, feine Linien und Aknenarben sichtbar verfeinert.",
     durationMin: 60,
-    priceFrom: 220,
+    priceFrom: 180,
     benefits: ["Verfeinerte Poren", "Festere Haut", "Glattere Struktur", "Mildert Narben"],
     idealFor: ["Feine Linien", "Grobe Poren", "Aknenarben", "Erschlaffte Haut"],
     process: [
@@ -64,7 +70,8 @@ export const TREATMENTS: Treatment[] = [
       { title: "Needling", text: "Präzise Behandlung mit sterilen Einweg-Modulen." },
       { title: "Beruhigung", text: "Kühlende Maske und Pflege für die Regeneration." },
     ],
-    imageLabel: "Microneedling: Nahaufnahme Hautstruktur",
+    imageLabel: "Microneedling-Behandlung am Wangenknochen, Profilansicht",
+    image: "/images/lux-microneedling.jpg",
     seo: {
       title: "Microneedling Zürich: Kollagen-Behandlung an der Bahnhofstrasse",
       description:
@@ -79,8 +86,8 @@ export const TREATMENTS: Treatment[] = [
     short: "Löst abgestorbene Hautschüppchen, mildert Pigmentflecken und schenkt einen ebenmässigen Teint.",
     intro:
       "Das Fruchtsäurepeeling (AHA) löst verhornte Hautzellen und regt die Zellerneuerung an. Unreinheiten, Pigmentierungen und erste Linien werden gemildert, die Haut wirkt klarer, glatter und strahlender. Die Konzentration wird individuell auf Ihre Haut abgestimmt.",
-    durationMin: 45,
-    priceFrom: 140,
+    durationMin: 60,
+    priceFrom: 150,
     benefits: ["Ebenmässiger Teint", "Weniger Unreinheiten", "Mildert Pigmentflecken", "Glattere Haut"],
     idealFor: ["Unreine Haut", "Pigmentflecken", "Grobe Hautstruktur"],
     process: [
@@ -89,7 +96,9 @@ export const TREATMENTS: Treatment[] = [
       { title: "Peeling", text: "Kontrollierte Einwirkzeit unter Beobachtung." },
       { title: "Neutralisation", text: "Beruhigende Pflege und Sonnenschutz." },
     ],
-    imageLabel: "Fruchtsäurepeeling: Auftragen mit Pinsel",
+    imageLabel: "Auftragen einer Pflegemaske mit dem Pinsel",
+    image: "/images/peeling-pinsel.jpg",
+    imagePosition: "50% 40%",
     seo: {
       title: "Fruchtsäurepeeling Zürich: AHA-Peeling für klare Haut",
       description:
@@ -104,8 +113,8 @@ export const TREATMENTS: Treatment[] = [
     short: "Kaltes Plasma wirkt antibakteriell, stärkt die Regeneration und unterstützt eine straffere Haut.",
     intro:
       "ColdPLASMA nutzt ionisiertes, kaltes Plasma. Es wirkt antibakteriell, verbessert die Aufnahme von Wirkstoffen und unterstützt die Regeneration der Haut. Ideal bei Unreinheiten, empfindlicher Haut und als Anti-Aging-Booster. Sanft und ohne Ausfallzeit.",
-    durationMin: 60,
-    priceFrom: 260,
+    durationMin: 90,
+    priceFrom: 180,
     benefits: ["Antibakteriell", "Stärkt die Regeneration", "Bessere Wirkstoffaufnahme", "Sanft & schmerzfrei"],
     idealFor: ["Akne & Entzündungen", "Empfindliche Haut", "Anti-Aging"],
     process: [
@@ -114,7 +123,8 @@ export const TREATMENTS: Treatment[] = [
       { title: "Plasma", text: "Behandlung mit kaltem Plasma, kaum spürbar." },
       { title: "Wirkstoffe", text: "Einschleusen passender Seren und Abschlusspflege." },
     ],
-    imageLabel: "ColdPLASMA: Gerät im Studio, ruhige Lichtstimmung",
+    imageLabel: "ColdPLASMA-Behandlung an der Schläfe, Aufsicht",
+    image: "/images/lux-coldplasma.jpg",
     seo: {
       title: "ColdPLASMA Zürich: Kaltplasma-Behandlung fürs Gesicht",
       description:
@@ -131,9 +141,9 @@ export const getTreatment = (slug: string) => TREATMENTS.find((t) => t.slug === 
 /* ------------------------------------------------------------------------ */
 // PLACEHOLDER: full price list to be confirmed
 export const PRICE_EXTRAS = [
-  { name: "Hautanalyse", durationMin: 30, price: 0 },
-  { name: "Klassische Gesichtsbehandlung", durationMin: 75, price: 160 },
-  { name: "Microneedling-Kur (3x)", durationMin: 180, price: 590, note: "3 × 60 Min" },
+  { name: "Klassische Gesichtsbehandlung", durationMin: 90, price: 180 },
+  { name: "Premium Activ Caviar", durationMin: 90, price: 235 },
+  { name: "Carbon Laser Peeling", durationMin: 60, price: 200 },
 ];
 
 /* ------------------------------------------------------------------------ */
@@ -293,7 +303,7 @@ export const REVIEWS = [
 export const FAQS = [
   {
     q: "Wie lange dauert eine Behandlung?",
-    a: "Je nach Behandlung zwischen 45 und 75 Minuten. Beim ersten Termin planen wir zusätzlich etwa 15 Minuten für die persönliche Hautanalyse ein.",
+    a: "Je nach Behandlung zwischen 60 und 90 Minuten. Beim ersten Termin planen wir zusätzlich etwa 15 Minuten für die persönliche Hautanalyse ein.",
   },
   {
     q: "Ist die Behandlung schmerzhaft?",
@@ -305,7 +315,7 @@ export const FAQS = [
   },
   {
     q: "Was kostet eine Behandlung?",
-    a: "Unsere Behandlungen beginnen ab CHF 140. Alle Preise finden Sie transparent in unserer Preisliste, ohne versteckte Kosten.",
+    a: "Unsere Gesichtsbehandlungen beginnen ab CHF 150. Alle Preise finden Sie transparent in unserer Preisliste, ohne versteckte Kosten.",
   },
   {
     q: "Welche Behandlung ist für meine Haut geeignet?",
@@ -321,6 +331,6 @@ export const FAQS = [
   },
   {
     q: "Muss ich vorher einen Beratungstermin vereinbaren?",
-    a: "Nicht zwingend. Sie können direkt eine Behandlung buchen, die Hautanalyse ist immer Teil Ihres ersten Termins. Bei Unsicherheit beraten wir Sie gerne vorab.",
+    a: "Nicht zwingend. Sie können direkt eine Behandlung buchen. Jede Behandlung beginnt mit einer kurzen Analyse Ihrer Haut. Bei Unsicherheit beraten wir Sie gerne vorab.",
   },
 ];

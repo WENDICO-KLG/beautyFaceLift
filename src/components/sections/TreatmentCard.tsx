@@ -51,7 +51,7 @@ export function TreatmentCard({ t, variant = "compact", tone = "base", className
       }}
     >
       <div className="absolute inset-0 transition-transform duration-[var(--duration-reveal)] ease-[var(--ease-luxe)] group-hover:scale-[1.03]">
-        <ImagePlaceholder label={t.imageLabel} tone={tone} rounded="rounded-none" className="h-full w-full" reveal={false} />
+        <ImagePlaceholder label={t.imageLabel} src={t.image} position={t.imagePosition} sizes="(min-width: 1024px) 40vw, 85vw" tone={tone} rounded="rounded-none" className="h-full w-full" reveal={false} />
       </div>
       <Link href={`/behandlungen/${t.slug}`} className="absolute inset-0" tabIndex={-1} aria-hidden="true" />
     </ShapedCard>

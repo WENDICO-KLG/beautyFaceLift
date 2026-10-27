@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { TERESA_PILLARS } from "@/lib/content";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
@@ -8,9 +9,10 @@ import { ShapedCard } from "@/components/ui/ShapedCard";
  * Typographic composition: the headline is split around Teresa's portrait
  * (desktop). Screen readers get the headline once via the sr-only h2.
  */
-export function AboutTeresa() {
+export function AboutTeresa({ variant = "full" }: { variant?: "teaser" | "full" }) {
+  const teaser = variant === "teaser";
   return (
-    <section id="teresa" className="overflow-hidden py-section" aria-labelledby="teresa-title">
+    <section className="overflow-hidden py-section" aria-labelledby="teresa-title">
       <h2 id="teresa-title" className="sr-only">
         20+ Jahre Erfahrung. Persönlich für Ihre Haut.
       </h2>
@@ -25,7 +27,10 @@ export function AboutTeresa() {
 
           <ShapedCard reveal className="mx-auto w-full max-w-[22rem] lg:w-[22rem]" topRight={{ className: "h-12 w-[38%]" }}>
             <ImagePlaceholder
-              label={`Portrait ${SITE.owner.name} im Studio, natürliches Licht`}
+              label={`${SITE.owner.name} in ihrem Studio an der Bahnhofstrasse`}
+              src="/images/teresa-stimac.jpg"
+              sizes="22rem"
+              position="50% 25%"
               ratio="4 / 5"
               tone="deep"
               rounded="rounded-none"
@@ -44,6 +49,20 @@ export function AboutTeresa() {
           </p>
         </div>
 
+        {teaser ? (
+          <div className="mx-auto mt-16 max-w-xl text-center lg:mt-20" data-reveal="up">
+            <p className="text-lead text-taupe">
+              {SITE.owner.name} behandelt jede Kundin selbst, seit über {SITE.owner.yearsExperience} Jahren an der
+              Bahnhofstrasse in Zürich.
+            </p>
+            <Link
+              href="/ueber-teresa"
+              className="mt-6 inline-flex text-small font-medium text-espresso underline decoration-champagne underline-offset-[6px] hover:decoration-espresso"
+            >
+              Mehr über Teresa
+            </Link>
+          </div>
+        ) : (
         <div className="mx-auto mt-20 grid max-w-5xl gap-12 lg:mt-28 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
           <div className="space-y-5 text-lead text-taupe" data-reveal="up">
             <p>
@@ -68,6 +87,7 @@ export function AboutTeresa() {
             ))}
           </dl>
         </div>
+        )}
       </div>
     </section>
   );

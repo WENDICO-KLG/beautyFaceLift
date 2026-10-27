@@ -41,7 +41,7 @@ export function CTASection({
               ),
             }}
           >
-            <ImagePlaceholder label="Detail: Hände von Teresa mit Pflegeprodukt" tone="deep" rounded="rounded-none" className="absolute inset-0" reveal={false} />
+            <ImagePlaceholder label="Gesichtsmassage mit warmen Händen" src="/images/gesichtsmassage-detail.jpg" position="50% 30%" sizes="(min-width: 1024px) 40vw, 100vw" tone="deep" rounded="rounded-none" className="absolute inset-0" reveal={false} />
           </ShapedCard>
         </div>
       </div>

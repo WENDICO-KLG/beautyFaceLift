@@ -23,10 +23,10 @@ export function Studio() {
               ),
             }}
           >
-            <ImagePlaceholder label="Behandlungsraum mit ruhiger, heller Atmosphäre" ratio="16 / 10" rounded="rounded-none" className="sm:h-full" reveal={false} />
+            <ImagePlaceholder label="Heller Behandlungsraum mit hohen Fenstern und Leinenvorhängen" src="/images/lux-behandlungsraum.jpg" position="50% 55%" sizes="(min-width: 640px) 58vw, 100vw" ratio="16 / 10" rounded="rounded-none" className="sm:h-full" reveal={false} />
           </ShapedCard>
-          <ImagePlaceholder label="Studio-Details: Produkte & Materialien" ratio="16 / 10" tone="deep" className="hidden sm:block" />
-          <ImagePlaceholder label="Eingang Bahnhofstrasse 94" ratio="16 / 10" className="hidden sm:block" />
+          <ImagePlaceholder label="Pflegeprodukte auf Travertin in warmem Tageslicht" src="/images/lux-produkte.jpg" sizes="40vw" ratio="16 / 10" tone="deep" className="hidden sm:block" />
+          <ImagePlaceholder label="Entspannte Kundin mit Pflegemaske" src="/images/gesichtsmaske.jpg" position="50% 30%" sizes="40vw" ratio="16 / 10" className="hidden sm:block" />
         </div>
 
         <div className="mt-16 grid gap-14 lg:mt-20 lg:grid-cols-[1fr_1.2fr] lg:gap-24">

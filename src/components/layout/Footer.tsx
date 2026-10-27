@@ -76,12 +76,12 @@ export function Footer() {
           {/* PLACEHOLDER: legal pages */}
           <ul className="flex gap-6">
             <li>
-              <Link href="/#kontakt" className="hover:text-espresso">
+              <Link href="/kontakt" className="hover:text-espresso">
                 Impressum
               </Link>
             </li>
             <li>
-              <Link href="/#kontakt" className="hover:text-espresso">
+              <Link href="/kontakt" className="hover:text-espresso">
                 Datenschutz
               </Link>
             </li>

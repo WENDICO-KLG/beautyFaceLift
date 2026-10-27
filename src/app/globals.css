@@ -88,7 +88,6 @@
    -------------------------------------------------------------------------- */
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
   body {
@@ -197,15 +196,13 @@
    -------------------------------------------------------------------------- */
 .js [data-reveal] {
   transition:
-    opacity var(--duration-slow) var(--ease-luxe),
-    transform var(--duration-slow) var(--ease-luxe),
-    clip-path var(--duration-reveal) var(--ease-luxe);
+    opacity 1000ms var(--ease-luxe),
+    transform 1000ms var(--ease-luxe);
   transition-delay: var(--reveal-delay, 0ms);
 }
-.js [data-reveal="up"]:not(.is-visible) { opacity: 0; transform: translate3d(0, 24px, 0); }
+.js [data-reveal="up"]:not(.is-visible) { opacity: 0; transform: translate3d(0, 16px, 0); }
 .js [data-reveal="fade"]:not(.is-visible) { opacity: 0; }
-.js [data-reveal="image"]:not(.is-visible) { clip-path: inset(12% 0 0 0 round var(--radius-media)); opacity: 0.4; }
-.js [data-reveal="image"].is-visible { clip-path: inset(0 0 0 0 round var(--radius-media)); }
+.js [data-reveal="image"]:not(.is-visible) { opacity: 0; transform: scale(1.015); }
 
 /* Subtle parallax on hero media – pure CSS, progressive enhancement */
 @supports (animation-timeline: view()) {

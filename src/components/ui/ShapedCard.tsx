@@ -41,7 +41,7 @@ export function ShapedCard({
     >
       {children}
       {topRight && (
-        <div className={`cut-tr ${topRight.className ?? (topRight.children ? "pb-2 pl-2" : "h-11 w-[34%]")}`}>
+        <div className={`cut-tr ${topRight.className ?? (topRight.children ? "pb-2 pl-2 pr-1.5 pt-1.5" : "h-11 w-[34%]")}`}>
           {topRight.children}
         </div>
       )}

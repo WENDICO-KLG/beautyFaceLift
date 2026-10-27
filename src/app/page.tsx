@@ -5,10 +5,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { Treatments } from "@/components/sections/Treatments";
 import { TreatmentFinder } from "@/components/sections/TreatmentFinder";
 import { AboutTeresa } from "@/components/sections/AboutTeresa";
-import { Results } from "@/components/sections/Results";
 import { Reviews } from "@/components/sections/Reviews";
-import { Studio } from "@/components/sections/Studio";
-import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -19,11 +16,8 @@ export default function HomePage() {
       <TrustBar />
       <Treatments />
       <TreatmentFinder />
-      <AboutTeresa />
-      <Results />
+      <AboutTeresa variant="teaser" />
       <Reviews />
-      <Studio />
-      <FAQ />
       <CTASection />
     </>
   );

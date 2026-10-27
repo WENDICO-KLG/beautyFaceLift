@@ -1,7 +1,7 @@
 # Beauty Face Lift – Website
 
 Relaunch der Website von **Beauty Face Lift**, Kosmetikstudio an der Bahnhofstrasse 94, 8001 Zürich. Inhaberin: Teresa Stimac, über 20 Jahre Erfahrung.
-Stack: **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4**. Keine weiteren Runtime-Dependencies.
+Stack: **Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4**. Einzige weitere Runtime-Dependency: `lenis` (Smooth Scrolling).
 
 ```bash
 npm run dev     # http://localhost:3000
@@ -25,7 +25,7 @@ Messbare Ziele:
 - Gold bzw. Champagne ist **Akzent, nie Fläche**: Primärbutton, Icons, feine Linien.
 - Editoriale Bildsprache, später echte Fotos von Teresa, dem Studio und Haut-Details. Formate: Hero und Portraits 4:5, Studio 16:10, Cards 4:5. Keine Stockgesichter.
 - Komponenten-Sprache (Referenz: Pinterest-Moodboard „Luméra“, Awwwards Beauty in Stem/Koba):
-  - **Gerahmter Hero**: Bildfläche als abgerundeter Rahmen, leicht vom Viewport eingerückt, Copy liegt unten links auf dem Bild, Fakten als schwebende Karten rechts.
+  - **Fullscreen-Hero**: Querformat-Foto Kante zu Kante (100svh), weicher Lichtverlauf von links (Desktop) bzw. unten (Mobile), Text unten links, Fakten als ruhige Zeile unter den CTAs.
   - **Split-Navigation**: Links links, Logo zentriert, „Termin buchen“ rechts. Unter `xl` runder Menü-Button.
   - **Cut-out-Cards** (`.notch`): Info-Panel sitzt in der Ecke des Bildes und teilt den Seitenhintergrund, runder Pfeil-Button darin.
   - **Bento statt gleicher Karten**: Behandlungen in einem 12er-Raster mit unterschiedlichen Grössen und Tönen.
@@ -45,6 +45,9 @@ Die Seite darf an keiner Stelle nach „von einer KI generiert“ aussehen. Grun
 - Zitate länger als 3 Zeilen, Attribution mit Gedankenstrich.
 
 Erlaubte Ausnahmen (bewusst, vom Briefing vorgegeben): warme Ivory/Champagne-Palette (Brand Sheet), Fakten im Hero (Kundenwunsch, als schwebende Karten gelöst).
+
+## Echte Daten (Quelle: beautyfacelift.ch, Okt. 2026)
+Telefon 079 214 34 62, Öffnungszeiten Mo bis Fr 10:00-20:00 und Sa 9:00-16:00, Buchung über Treatwell (`buchung.treatwell.ch/ort/beauty-face-lift/`), Instagram `@beautyfacelift.zh`, Facebook `BeautyFaceLiftZuerich`. Preise der Hauptbehandlungen aus der dortigen Preisliste. Das vollständige Angebot umfasst zusätzlich Carbon Peeling, Brauen/Wimpern, Massage, Waxing, Make-up und Laser-Haarentfernung.
 
 ## Farbpalette (Tokens in `src/app/globals.css`)
 | Token | Hex | Verwendung |
@@ -91,22 +94,23 @@ Jede Karte nutzt `ui/ShapedCard`: abgerundete Karte mit **ausgestufter Ecke oben
    - Slider über `input[type=range]`
    - `prefers-reduced-motion` wird respektiert
 
-## Seitenstruktur (`src/app/page.tsx`)
-| Nr. | Section | id | Inhalt |
-|---|---|---|---|
-| 01 | Hero | – | H1, Subline, 2 CTAs, Fakten, Bild |
-| 02 | TrustBar | – | 4.8/5 · 20+ · Zürich · Persönlich |
-| 03 | Treatments | `#behandlungen` | 4 Cards, Preisliste `#preise`, CTA |
-| 04 | TreatmentFinder | `#finder` | Hautanliegen → Empfehlung → Buchung |
-| 05 | AboutTeresa | `#teresa` | |
-| 06 | Results | `#ergebnisse` | Vorher/Nachher-Slider |
-| 07 | Reviews | `#bewertungen` | inkl. CTA |
-| 08 | Studio | `#kontakt` | Adresse, Öffnungszeiten, Maps, Anfahrt |
-| 09 | FAQ | `#faq` | |
-| 10 | FinalCTA | – | |
-| – | Footer | – | |
+## Seitenstruktur (Multi-Page)
+Keine Onepager-Seite: jede Hauptnavigation führt auf eine eigene URL mit eigener H1, eigenem Metadata und eigenem Schema.
 
-Treatment-Landingpages unter `/behandlungen/[slug]` (Hydra4Face, Microneedling, Fruchtsäurepeeling, ColdPLASMA): statisch generiert, eigenes Metadata und Service-Schema.
+| Route | Inhalt | Schema |
+|---|---|---|
+| `/` | Hero, TrustBar, Behandlungen (Bento + Links), Treatment Finder, Teresa-Teaser, Bewertungen, Final CTA | WebSite, BeautySalon, Person, Service |
+| `/behandlungen` | PageHeader, alle Behandlungen (Bento), Treatment Finder, CTA | CollectionPage, Breadcrumb |
+| `/behandlungen/[slug]` | Landingpage pro Behandlung | Service, BeautySalon, Breadcrumb |
+| `/preise` | PageHeader, Preisliste, FAQ-Auszug Kosten, CTA | WebPage, FAQPage, Breadcrumb |
+| `/ueber-teresa` | PageHeader, Typo-Komposition + Geschichte + Werte, Bewertungen, CTA | AboutPage, Person, Breadcrumb |
+| `/ergebnisse` | PageHeader, Vorher/Nachher, Bewertungen, CTA | WebPage, Breadcrumb |
+| `/faq` | PageHeader, alle Fragen, CTA | FAQPage, Breadcrumb |
+| `/kontakt` | PageHeader, Studio, Adresse, Öffnungszeiten, Anfahrt, CTA | ContactPage, BeautySalon, Breadcrumb |
+
+- Unterseiten starten mit `layout/PageHeader` (gerahmtes Panel, Breadcrumb, H1, Lead, optional Bild in `ShapedCard`).
+- Sections sind wiederverwendbar und kennen keine Seiten-Anker mehr. Interne Links zeigen auf Routen, nicht auf `#ids`.
+- Navigation: Behandlungen, Preise, Über Teresa, Ergebnisse, FAQ, Kontakt (aktiver Punkt unterstrichen).
 
 ## Komponentenstruktur
 ```
@@ -131,8 +135,8 @@ Regeln:
 Luxury = restraint.
 
 **Erlaubt**
-- Fade-up (24 px, 900 ms)
-- Image Reveal (clip-path, 1200 ms)
+- Fade-up (16 px, 1000 ms) und Bild-Einblendung (Opacity + Scale 1.015). Kein clip-path und kein Blur: beides ist beim Scrollen teuer und ruckelt.
+- **Smooth Scrolling mit Lenis** (`ui/SmoothScroll`, ~3 KB): Trägheit für Mausrad und Trackpad, Touch bleibt nativ, aus bei `prefers-reduced-motion`, pausiert bei offenem Mobile-Menü (Event `bfl:menu`).
 - Leichtes Parallax nur im Hero-Bild, umgesetzt per CSS `animation-timeline: view()` ohne JS
 - Hover: Bild-Scale ≤ 1.03, Pfeil-Shift 4 px
 - Sticky-Nav-Transition (Zustand via IntersectionObserver auf `#top-sentinel`, `[data-hero]`, `[data-final-cta]`)
@@ -148,11 +152,12 @@ Luxury = restraint.
 - Partikel
 - 3D
 - Scroll-Jacking
-- Animationsbibliotheken (GSAP/Motion), solange CSS reicht
+- Animationsbibliotheken (GSAP/Motion), solange CSS reicht. Einzige Ausnahme: Lenis für das Scrollgefühl.
+- `backdrop-filter`/Blur auf grossen oder sticky Flächen (Navigation, Leisten)
 
 ## Conversion & Booking Strategy
 - Primär-CTA ist überall **„Termin buchen“**. Er führt auf `SITE.bookingUrl`: Treatwell, später Deep-Link pro Treatment über `treatment.bookingUrl`.
-- Sekundär-CTA ist **„Beratung anfragen“**. Er führt auf `SITE.consultUrl` (Kontakt-Section mit Telefon und E-Mail).
+- Sekundär-CTA ist **„Beratung anfragen“**. Er führt auf `SITE.consultUrl` (`/kontakt`).
 - CTA-Positionen:
   - Navigation (sticky)
   - Hero
@@ -191,7 +196,7 @@ Luxury = restraint.
 - Fast alles ist Server-gerendert und statisch. Client-JS beschränkt sich auf kleine Inseln.
 - Fonts via `next/font` (self-hosted, Subset latin, `swap`, Fallback-Metriken) → kein CLS.
 - Bilder später via `next/image`:
-  - AVIF/WebP ist in `next.config.ts` aktiviert
+  - Nur WebP in `next.config.ts`: AVIF braucht beim ersten Aufruf mehrere Sekunden pro Bild (schlechtes LCP bei kaltem Cache)
   - `sizes` immer setzen
   - Hero-Bild mit `priority`, Rest lazy
 - Placeholder haben feste `aspect-ratio` → kein CLS.
@@ -219,4 +224,4 @@ Alle Stellen sind im Code mit `PLACEHOLDER` markiert, Suche: `grep -rn PLACEHOLD
 - Review-Texte: Beispieltexte, durch echte Treatwell-Zitate mit Erlaubnis ersetzen
 - Vorher/Nachher-Fälle
 - Impressum und Datenschutz
-- Alle Bilder
+- Bilder: Mischung aus lizenzfreien Pexels-Fotos und ChatGPT-Kampagnenbildern (siehe `docs/image-credits.md`), vor Livegang durch eigenes Shooting ersetzen. Teresa-Portrait und Vorher/Nachher sind noch Platzhalter.

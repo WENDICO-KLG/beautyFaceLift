@@ -9,7 +9,7 @@ import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { ShapedCard } from "@/components/ui/ShapedCard";
 
 export function TreatmentFinder() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string>("glow");
   const resultRef = useRef<HTMLDivElement>(null);
 
   const select = (id: string) => {
@@ -53,7 +53,6 @@ export function TreatmentFinder() {
                         : "border-line bg-white text-espresso hover:border-champagne"
                     }`}
                   >
-                    <Icon name={c.icon} className={`size-5 shrink-0 ${active ? "text-champagne" : "text-champagne-deep"}`} />
                     <span className="flex-1">{c.label}</span>
                   </button>
                 </li>
@@ -64,13 +63,6 @@ export function TreatmentFinder() {
 
         {/* Result */}
         <div ref={resultRef} aria-live="polite" className="scroll-mt-24 lg:pt-6" data-reveal="up" style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
-          {!concern && (
-            <div className="flex h-full min-h-80 flex-col items-center justify-center rounded-card border border-dashed border-champagne/60 p-10 text-center">
-              <p className="max-w-xs text-small text-taupe">
-                Ihre persönliche Empfehlung erscheint hier, sobald Sie ein Hautanliegen gewählt haben.
-              </p>
-            </div>
-          )}
 
           {concern && (
             <ShapedCard
@@ -79,12 +71,15 @@ export function TreatmentFinder() {
               surface="var(--color-beige-soft)"
               className="animate-fade-up bg-white"
               topRight={{
-                className: "pb-2 pl-3 pt-1",
+                className: "pb-2 pl-3 pr-1.5 pt-1.5",
                 children: <span className="block rounded-full bg-espresso px-4 py-2 text-[0.75rem] text-ivory">Unsere Empfehlung</span>,
               }}
             >
               <ImagePlaceholder
-                label={treatment ? treatment.imageLabel : "Persönliche Hautanalyse mit Teresa"}
+                label={treatment ? treatment.imageLabel : "Ruhige Gesichtsbehandlung im Studio"}
+                src={treatment ? treatment.image : "/images/gesichtsmassage-detail.jpg"}
+                position={treatment?.imagePosition ?? "72% 40%"}
+                sizes="(min-width: 1024px) 45vw, 100vw"
                 ratio="16 / 9"
                 rounded="rounded-none"
                 reveal={false}

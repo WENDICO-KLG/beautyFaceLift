@@ -50,7 +50,7 @@ export default async function TreatmentPage({ params }: { params: Promise<Params
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/#behandlungen" className="hover:text-espresso">
+                <Link href="/behandlungen" className="hover:text-espresso">
                   Behandlungen
                 </Link>
               </li>
@@ -82,7 +82,7 @@ export default async function TreatmentPage({ params }: { params: Promise<Params
                 </Button>
               </div>
             </div>
-            <ImagePlaceholder label={t.imageLabel} ratio="4 / 5" parallax />
+            <ImagePlaceholder label={t.imageLabel} src={t.image} position={t.imagePosition} sizes="(min-width: 1024px) 45vw, 100vw" priority ratio="4 / 5" parallax />
           </div>
         </div>
       </section>

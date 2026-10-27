@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FAQS } from "@/lib/content";
 import { SITE } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
@@ -20,13 +21,20 @@ export function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; d
   );
 }
 
-export function FAQ() {
+type FAQProps = {
+  items?: { q: string; a: string }[];
+  title?: string;
+  /** Show a link to the full FAQ page (for excerpts on other pages) */
+  showAllLink?: boolean;
+};
+
+export function FAQ({ items = FAQS, title = "Häufige Fragen", showAllLink = false }: FAQProps) {
   return (
-    <section id="faq" className="py-section" aria-labelledby="faq-title">
+    <section className="py-section" aria-labelledby="faq-title">
       <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
         <div data-reveal="up" className="lg:sticky lg:top-28 lg:self-start">
           <h2 id="faq-title" className="text-h2 text-espresso">
-            Häufige Fragen
+            {title}
           </h2>
           <p className="mt-6 max-w-prose-narrow text-lead text-taupe">
             Ihre Frage ist nicht dabei? Teresa berät Sie gerne persönlich.
@@ -36,9 +44,17 @@ export function FAQ() {
               Beratung anfragen
             </Button>
           </div>
+          {showAllLink && (
+            <Link
+              href="/faq"
+              className="mt-6 inline-flex text-small font-medium text-espresso underline decoration-champagne underline-offset-[6px] hover:decoration-espresso"
+            >
+              Alle Fragen ansehen
+            </Link>
+          )}
         </div>
         <div className="border-t border-line" data-reveal="up">
-          {FAQS.map((f, i) => (
+          {items.map((f, i) => (
             <FAQItem key={f.q} q={f.q} a={f.a} defaultOpen={i === 0} />
           ))}
         </div>

@@ -1,16 +1,18 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/site";
+import { SITE, NAV_LINKS } from "@/lib/site";
 import { TREATMENTS } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const page = (path: string, priority: number) => ({
+    url: `${SITE.url}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority,
+  });
   return [
-    { url: SITE.url, lastModified: now, changeFrequency: "monthly", priority: 1 },
-    ...TREATMENTS.map((t) => ({
-      url: `${SITE.url}/behandlungen/${t.slug}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    })),
+    page("", 1),
+    ...NAV_LINKS.filter((l) => l.href !== "/").map((l) => page(l.href, l.href === "/behandlungen" ? 0.9 : 0.7)),
+    ...TREATMENTS.map((t) => page(`/behandlungen/${t.slug}`, 0.8)),
   ];
 }

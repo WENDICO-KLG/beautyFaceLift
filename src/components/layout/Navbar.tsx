@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
@@ -17,6 +18,8 @@ export function Navbar() {
   const [heroVisible, setHeroVisible] = useState(true);
   const [ctaVisible, setCtaVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
     const watch = (selector: string, cb: (visible: boolean) => void) => {
@@ -39,6 +42,7 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    window.dispatchEvent(new CustomEvent("bfl:menu", { detail: open }));
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -51,7 +55,7 @@ export function Navbar() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,padding] duration-[var(--duration-base)] ease-[var(--ease-luxe)] ${
-          scrolled || open ? "border-line bg-ivory/85 backdrop-blur-md" : "border-transparent sm:pt-3"
+          scrolled || open ? "border-line bg-ivory/95" : "border-transparent sm:pt-3"
         }`}
       >
         <nav
@@ -60,10 +64,16 @@ export function Navbar() {
             scrolled ? "h-16" : "h-[4.5rem]"
           }`}
         >
-          <ul className="hidden items-center gap-7 xl:flex">
+          <ul className="hidden items-center gap-6 xl:flex">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-[0.8125rem] text-espresso/80 transition-colors duration-300 hover:text-espresso">
+                <Link
+                  href={l.href}
+                  aria-current={isActive(l.href) ? "page" : undefined}
+                  className={`text-[0.8125rem] transition-colors duration-300 hover:text-espresso ${
+                    isActive(l.href) ? "text-espresso underline decoration-champagne underline-offset-[6px]" : "text-espresso/75"
+                  }`}
+                >
                   {l.label}
                 </Link>
               </li>
@@ -162,7 +172,7 @@ export function Navbar() {
           showBar ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0"
         }`}
       >
-        <div className="flex items-center gap-3 rounded-full border border-line bg-white/90 p-1.5 pl-5 shadow-soft backdrop-blur-md">
+        <div className="flex items-center gap-3 rounded-full border border-line bg-white p-1.5 pl-5 shadow-soft">
           <div className="min-w-0 flex-1 leading-tight">
             <p className="truncate font-display text-[1.05rem] text-espresso">Ihr Termin</p>
             <p className="truncate text-[0.75rem] text-taupe">

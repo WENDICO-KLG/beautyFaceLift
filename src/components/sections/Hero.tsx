@@ -1,117 +1,80 @@
 import { SITE } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { Icon } from "@/components/ui/Icon";
-import { Stars } from "@/components/ui/misc";
 
 const delay = (ms: number) => ({ "--reveal-delay": `${ms}ms` }) as React.CSSProperties;
 
-/** Floating info card on the hero media (frosted surface, near-solid fallback via bg alpha). */
-function FloatCard({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
-  return (
-    <div
-      className="rounded-card border border-white/70 bg-white/80 p-4 shadow-soft backdrop-blur-md sm:p-5"
-      data-reveal="up"
-      style={style}
-    >
-      {children}
-    </div>
-  );
-}
+const FACTS = [
+  { value: `${SITE.rating.value}/5`, label: `${SITE.rating.count}+ Bewertungen auf ${SITE.rating.source}` },
+  { value: `${SITE.owner.yearsExperience}+ Jahre`, label: "Erfahrung" },
+  { value: SITE.address.street, label: `${SITE.address.postalCode} ${SITE.address.city}` },
+];
 
 /**
- * Framed full-bleed hero: the media sits in a rounded frame inset from the
- * viewport, copy is set on top of it (bottom-left), facts float on the right.
+ * Full-screen hero: edge-to-edge photograph (100svh), copy set on the calm
+ * part of the image (bottom-left), facts as a quiet row below the CTAs.
  */
 export function Hero() {
   return (
-    <section data-hero className="px-[var(--spacing-frame)] pt-[var(--spacing-frame)]" aria-labelledby="hero-title">
-      <div className="relative isolate flex min-h-[calc(100dvh-1rem)] flex-col overflow-hidden rounded-panel sm:min-h-[calc(100dvh-1.5rem)] lg:max-h-[60rem]">
-        <div className="absolute inset-0 -z-10">
-          <ImagePlaceholder
-            label="Teresa bei einer Gesichtsbehandlung im Studio, warmes Tageslicht"
-            tone="deep"
-            rounded="rounded-none"
-            className="h-full"
-            showTag={false}
-            reveal={false}
-            parallax
-          />
-        </div>
-        {/* Legibility scrim for the future photo */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-ivory/50 via-ivory/10 to-transparent" />
-        {/* PLACEHOLDER caption, remove with real photo */}
-        <p className="absolute bottom-5 right-6 hidden text-[0.6875rem] text-espresso/45 lg:block">
-          Bildplatzhalter: Teresa bei einer Gesichtsbehandlung
+    <section data-hero className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-beige" aria-labelledby="hero-title">
+      <div className="absolute inset-0 -z-10">
+        <ImagePlaceholder
+          label="Entspannende Gesichtsmassage im warmen Morgenlicht, die Kundin mit geschlossenen Augen"
+          src="/images/hero-kampagne.jpg"
+          sizes="100vw"
+          priority
+          position="72% 50%"
+          rounded="rounded-none"
+          className="h-full"
+          showTag={false}
+          reveal={false}
+          parallax
+        />
+      </div>
+      {/* Legibility: soft light from the left (desktop) / from the bottom (mobile) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgb(247_244_239)_0%,rgb(247_244_239/0.92)_42%,rgb(247_244_239/0)_68%)] lg:bg-[linear-gradient(90deg,rgb(247_244_239/0.85)_0%,rgb(247_244_239/0.6)_32%,rgb(247_244_239/0)_55%)]"
+      />
+
+      <div className="container-site mt-auto pb-10 pt-40 sm:pb-14 lg:pb-20">
+        <h1 id="hero-title" className="max-w-3xl">
+          <span className="eyebrow block" data-reveal="fade">
+            Kosmetikstudio in Zürich
+          </span>
+          <span className="mt-6 block text-display text-espresso" data-reveal="up" style={delay(100)}>
+            Ihre Haut.
+            <br />
+            <span className="text-espresso/45">Ihre Schönheit.</span>
+            <br />
+            Ihre Zeit.
+          </span>
+        </h1>
+
+        <p className="mt-7 max-w-md text-lead text-espresso/80" data-reveal="up" style={delay(220)}>
+          Professionelle Gesichts- und Hautbehandlungen im Herzen von Zürich, persönlich durchgeführt mit über{" "}
+          {SITE.owner.yearsExperience} Jahren Erfahrung.
         </p>
 
-        <div className="container-site mt-auto grid gap-10 pb-8 pt-32 sm:pb-12 lg:grid-cols-[1fr_auto] lg:items-end lg:pb-16">
-          <div>
-            <h1 id="hero-title">
-              <span className="eyebrow block" data-reveal="fade">
-                Kosmetikstudio in Zürich
-              </span>
-              <span className="mt-6 block text-display text-espresso" data-reveal="up" style={delay(100)}>
-                Ihre Haut.
-                <br />
-                <span className="text-espresso/45">Ihre Schönheit.</span>
-                <br />
-                Ihre Zeit.
-              </span>
-            </h1>
-
-            <p className="mt-7 max-w-md text-lead text-espresso/75" data-reveal="up" style={delay(220)}>
-              Professionelle Gesichts- und Hautbehandlungen im Herzen von Zürich, persönlich durchgeführt mit über{" "}
-              {SITE.owner.yearsExperience} Jahren Erfahrung.
-            </p>
-
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row" data-reveal="up" style={delay(320)}>
-              <Button href={SITE.bookingUrl}>Termin buchen</Button>
-              <Button href={SITE.consultUrl} variant="secondary" arrow={false}>
-                Beratung anfragen
-              </Button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 lg:w-72 lg:grid-cols-1">
-            <FloatCard style={delay(450)}>
-              <p className="flex items-baseline gap-2">
-                <span className="font-display text-[2rem] leading-none text-espresso sm:text-[2.5rem]">{SITE.rating.value}</span>
-                <span className="text-small text-taupe">/ 5</span>
-              </p>
-              <Stars className="mt-2 size-3.5" />
-              <p className="mt-2 text-[0.75rem] leading-snug text-taupe">
-                {SITE.rating.count}+ Bewertungen auf {SITE.rating.source}
-              </p>
-            </FloatCard>
-
-            <FloatCard style={delay(550)}>
-              <div className="flex items-center gap-3">
-                <ImagePlaceholder
-                  label={`Portrait ${SITE.owner.name}`}
-                  tone="light"
-                  rounded="rounded-full"
-                  className="size-11 shrink-0"
-                  showTag={false}
-                  reveal={false}
-                />
-                <div className="min-w-0 leading-tight">
-                  <p className="font-display text-[1.0625rem] text-espresso">{SITE.owner.name}</p>
-                  <p className="mt-0.5 text-[0.75rem] text-taupe">{SITE.owner.yearsExperience}+ Jahre Erfahrung</p>
-                </div>
-              </div>
-              <a
-                href={SITE.mapsUrl}
-                target="_blank"
-                rel="noopener"
-                className="mt-4 flex items-center gap-2 border-t border-line pt-3 text-[0.75rem] text-espresso/80 hover:text-espresso"
-              >
-                <Icon name="pin" className="size-4 shrink-0 text-champagne-deep" />
-                {SITE.address.street}, {SITE.address.city}
-              </a>
-            </FloatCard>
-          </div>
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row" data-reveal="up" style={delay(320)}>
+          <Button href={SITE.bookingUrl}>Termin buchen</Button>
+          <Button href={SITE.consultUrl} variant="secondary" arrow={false}>
+            Beratung anfragen
+          </Button>
         </div>
+
+        <dl
+          className="mt-12 hidden max-w-2xl grid-cols-3 gap-8 border-t border-espresso/15 pt-6 sm:grid"
+          data-reveal="fade"
+          style={delay(450)}
+        >
+          {FACTS.map((f) => (
+            <div key={f.value} className="flex flex-col-reverse">
+              <dt className="text-[0.75rem] text-espresso/65">{f.label}</dt>
+              <dd className="font-display text-[1.25rem] text-espresso">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

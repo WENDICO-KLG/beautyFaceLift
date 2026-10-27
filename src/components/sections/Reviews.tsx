@@ -16,7 +16,7 @@ export function ReviewCard({ r }: { r: Review }) {
       as="figure"
       className="flex h-full flex-col bg-white p-7 sm:p-9"
       topRight={{
-        className: "pb-2 pl-3 pt-1",
+        className: "pb-2 pl-3 pr-1.5 pt-1.5",
         children: <span className="block rounded-full border border-line px-4 py-2 text-[0.75rem] text-espresso">{r.treatment}</span>,
       }}
     >

@@ -59,7 +59,7 @@ export function businessSchema() {
     logo: `${SITE.url}/brand/logo-gold.png`,
     telephone: SITE.phone,
     email: SITE.email,
-    priceRange: "CHF 140-260",
+    priceRange: "CHF 150-280",
     currenciesAccepted: "CHF",
     address: postalAddress,
     geo: { "@type": "GeoCoordinates", latitude: SITE.geo.lat, longitude: SITE.geo.lng },
@@ -105,14 +105,6 @@ export function homeGraph() {
       businessSchema(),
       personSchema(),
       ...TREATMENTS.map(serviceSchema),
-      {
-        "@type": "FAQPage",
-        mainEntity: FAQS.map((f) => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-      },
     ],
   };
 }
@@ -127,10 +119,58 @@ export function treatmentGraph(t: Treatment) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: SITE.name, item: SITE.url },
-          { "@type": "ListItem", position: 2, name: "Behandlungen", item: `${SITE.url}/#behandlungen` },
+          { "@type": "ListItem", position: 2, name: "Behandlungen", item: `${SITE.url}/behandlungen` },
           { "@type": "ListItem", position: 3, name: t.name, item: treatmentUrl(t.slug) },
         ],
       },
+    ],
+  };
+}
+
+export function faqSchema(items: { q: string; a: string }[] = FAQS) {
+  return {
+    "@type": "FAQPage",
+    mainEntity: items.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** WebPage + BreadcrumbList for a sub page, plus optional extra nodes. */
+export function pageGraph({
+  path,
+  name,
+  type = "WebPage",
+  extra = [],
+}: {
+  path: string;
+  name: string;
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "FAQPage" | "CollectionPage";
+  extra?: object[];
+}) {
+  const url = `${SITE.url}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": type,
+        "@id": `${url}#webpage`,
+        url,
+        name,
+        inLanguage: "de-CH",
+        isPartOf: { "@id": `${SITE.url}/#website` },
+        about: { "@id": BUSINESS_ID },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: SITE.name, item: SITE.url },
+          { "@type": "ListItem", position: 2, name, item: url },
+        ],
+      },
+      ...extra,
     ],
   };
 }

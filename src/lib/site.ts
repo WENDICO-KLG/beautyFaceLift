@@ -30,36 +30,41 @@ export const SITE = {
   // Approximate coordinates of Bahnhofstrasse 94, verify before launch
   geo: { lat: 47.3763, lng: 8.5393 },
 
-  // PLACEHOLDER: real contact data
-  phone: "+41 44 000 00 00",
-  phoneDisplay: "044 000 00 00",
+  // Source: beautyfacelift.ch (Oct 2026)
+  phone: "+41 79 214 34 62",
+  phoneDisplay: "079 214 34 62",
   email: "info@beautyfacelift.ch",
 
   rating: { value: 4.8, count: 260, source: "Treatwell" },
 
-  // PLACEHOLDER: real Treatwell venue URL (deep link per treatment later)
-  bookingUrl: "https://www.treatwell.ch/",
-  consultUrl: "/#kontakt",
+  // Treatwell venue page (from beautyfacelift.ch/buchen)
+  bookingUrl: "https://buchung.treatwell.ch/ort/beauty-face-lift/",
+  consultUrl: "/kontakt",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Beauty+Face+Lift+Bahnhofstrasse+94+8001+Z%C3%BCrich",
 
-  // PLACEHOLDER: real opening hours
+  // Source: beautyfacelift.ch (Oct 2026)
   openingHours: [
-    { label: "Montag bis Freitag", days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
+    { label: "Montag bis Freitag", days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "10:00", closes: "20:00" },
     { label: "Samstag", days: ["Saturday"], opens: "09:00", closes: "16:00" },
     { label: "Sonntag", days: [], opens: "", closes: "" },
   ],
 
-  // PLACEHOLDER: social / listing profiles for sameAs
-  sameAs: [] as string[],
+  sameAs: [
+    "https://www.instagram.com/beautyfacelift.zh/",
+    "https://www.facebook.com/BeautyFaceLiftZuerich/",
+    "https://buchung.treatwell.ch/ort/beauty-face-lift/",
+  ] as string[],
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Behandlungen", href: "/#behandlungen" },
-  { label: "Preise", href: "/#preise" },
-  { label: "Über Teresa", href: "/#teresa" },
-  { label: "Ergebnisse", href: "/#ergebnisse" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Home", href: "/" },
+  { label: "Behandlungen", href: "/behandlungen" },
+  { label: "Preise", href: "/preise" },
+  { label: "Über Teresa", href: "/ueber-teresa" },
+  { label: "Ergebnisse", href: "/ergebnisse" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Kontakt", href: "/kontakt" },
 ] as const;
 
 export const fullAddress = `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}`;
